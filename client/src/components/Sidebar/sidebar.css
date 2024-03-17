@@ -1,0 +1,4 @@
+.sidebar-submenu::before{
+    content: '- ';
+}
+

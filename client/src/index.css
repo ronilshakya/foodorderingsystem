@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.theme-main-color{
+    @apply bg-orange-500;
+}
+.theme-light-color{
+    @apply bg-orange-400;
+}
+.custom-light-color{
+    background-color: #fff3e6;
+}
+.theme-hover-color{
+    @apply bg-orange-600;
+}
+.page-template{
+    @apply lg:ml-72 ;
+    @apply pt-28;
+}
+.order-btn{
+    @apply bg-white;
+    @apply px-2;
+    @apply py-1;
+    @apply border-orange-500 ;
+    @apply border-l;
+    @apply border-r;
+}
