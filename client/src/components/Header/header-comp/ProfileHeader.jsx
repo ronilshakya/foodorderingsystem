@@ -19,9 +19,7 @@ const ProfileHeader = () => {
         setNavOpen(!navOpen);
     }
     const menu = [
-        {title: "Profile",url:"",icon: userImg},
-        {title: "Inbox",url:"",icon: mailImg},
-        {title: "Notification",url:"",icon: notificationImg},
+        {title: "Profile",url:"profile",icon: userImg},
         {title: "Logout",url:"", icon: logoutImg, onClick: logout},
     ]
     const menuList = menu.map(

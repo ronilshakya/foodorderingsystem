@@ -64,7 +64,7 @@ exports.signin = async (req, res, next) => {
             {expiresIn : '90d'}
         )
 
-        res.status(200).json({
+        res.status(201).json({
             status: "success", 
             message:"Logged in successfully", 
             token,
@@ -103,3 +103,17 @@ exports.removeUser = async (req,res,next) =>{
         next(error);
     }
 } 
+
+exports.updateUser = async (req,res,next) =>{
+    try {
+        const updateUser = await User.findByIdAndUpdate(req.params.id,{
+            username: req.body.username
+        },{new:true})
+        if(!updateUser){
+            res.status(400).json({message: "Something went wrong"})
+        }
+        res.send(updateUser)
+    } catch (error) {
+        return res.status(400).json({ error: error })
+    }
+}

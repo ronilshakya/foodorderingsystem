@@ -17,11 +17,11 @@ const Menu = (props) => {
         }
     }
     useEffect(()=>{
-        if (location.pathname === '/' || location.pathname.startsWith('/administrator/')) {
+        if (location.pathname === '/' || location.pathname.startsWith('/administrator')) {
             setOpenItem(0);
         }
         
-    },[location.pathname])
+    },[])
     
     // scroll to id
     const [scrollTarget, setScrollTarget] = useState(null);
@@ -35,6 +35,7 @@ const Menu = (props) => {
     const scrollToElement = (id) =>{
         const element = document.getElementById(id);
         setScrollTarget(element);
+        props.triggerSidebar();
     }
   return (
     <>
@@ -42,7 +43,7 @@ const Menu = (props) => {
                     {
                         props.sidebarItems.map(
                             (item,index)=>(
-                                <li key={index} className="list-none p-2 cursor-pointer">
+                                <li key={index} className={`list-none p-2 ${window.innerWidth<1024 ? 'opacity-0 ':'opacity-100'} cursor-pointer ${props.openedSidebar && 'opacity-100 transition duration-1000'}`}>
                                     <div onClick={()=>toggleSubmenu(index)} className={`px-2 py-3 flex items-center rounded-lg transition-all ${openItem===index?"theme-main-color text-white":""}`}>
                                         <div className='grow-0'>{item.icon}</div>
                                         <div className='grow px-2'>{item.title}</div>

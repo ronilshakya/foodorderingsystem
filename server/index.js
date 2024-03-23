@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const authRouter = require('./routes/authRoute')
+const foodRouter = require('./routes/foodRoute')
 
 // env
 const port = process.env.PORT;
@@ -21,6 +22,8 @@ db.once('open',() => {console.log("Database connection success")})
 
 //routes 
 app.use('/api/auth', authRouter)
+app.use('/food', foodRouter)
+app.use(express.static('public'))
 
 app.listen(port,()=>{
     console.log(`server started at port ${port}`);

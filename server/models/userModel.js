@@ -13,7 +13,11 @@ const userSchema = mongoose.Schema({
     password:{
         type: String,
         required: true
-    }
+    },
+    createdAt:{
+        type: String,
+        default: () => new Date().toLocaleDateString('en-GB')
+    }  
 })
 const User = new mongoose.model("User", userSchema)
 module.exports = User

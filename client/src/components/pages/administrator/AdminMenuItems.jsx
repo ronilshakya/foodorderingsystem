@@ -5,23 +5,23 @@ export const sidebarItems = [
             {
                 id: 1,
                 title: "All Users",
-                url: "user",
+                url: "",
+            }
+        ]
+    },
+    {
+        title: "Food Items",
+        submenu:[
+            {
+                id: 1,
+                title: "Add Food Items",
+                url: "add-food"
             },
             {
                 id: 2,
-                title: "Add User",
-                url: "/users/add",
-            },
-            {
-                id: 3,
-                title: "Remove User",
-                url: "/users/add",
-            },
-            {
-                id: 4,
-                title: "Update User",
-                url: "/users/add",
-            },
+                title: "Get Food Items",
+                url: "get-food"
+            }
         ]
-    },
+    }
 ];

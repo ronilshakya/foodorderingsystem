@@ -115,7 +115,7 @@ const SignUpForm = () => {
         <div className="bg-orange-50 h-lvh w-full flex items-center justify-center">
             <div className="bg-white shadow-lg p-8 flex flex-col gap-7">
                 <div className="flex flex-col items-center gap-4">
-                    <h1 className="text-4xl">FoodDesk</h1>
+                    <Link to='/'><h1 className="text-4xl">FoodDesk</h1></Link>
                     <div className="flex items-center w-3/5">
                         <hr className="flex-grow border-t border-gray-300" />
                         <span className="px-3 text-gray-500">Sign up your account</span>
@@ -165,7 +165,7 @@ const SignUpForm = () => {
                 <div>
                     <h4 className="text-sm text-neutral-600 text-center">
                         Already have an account?
-                        <Link to="/" className="text-orange-500"> Sign in</Link>
+                        <Link to="/sign-in-form" className="text-orange-500"> Sign in</Link>
                     </h4>
                 </div>
             </div>

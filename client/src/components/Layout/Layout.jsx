@@ -9,6 +9,22 @@ export default function Dashboard() {
     const triggerSidebar = () =>{
         setOpenedSidebar(!openedSidebar);
     }
+    useEffect(() => {
+        const handleResize = () => {
+          if (window.innerWidth > 1024) {
+            setOpenedSidebar(true);
+          } else {
+            setOpenedSidebar(false);
+          }
+        };
+    
+        handleResize();
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+      }, []);
     return(
         <div>
             <Header 

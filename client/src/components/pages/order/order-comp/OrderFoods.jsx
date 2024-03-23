@@ -9,7 +9,7 @@ const OrderFoods = (props) => {
   return (
     <div id={`${foodItem}`} className='p-2 my-4'>
         <h1 className='text-lg my-2 font-semibold'>{foodItem}</h1>
-        <div className='grid grid-cols-3 gap-4'>
+        <div className='grid grid-cols-3 max-sm:grid-cols-2 gap-4'>
         {
                 FoodProductsData.filter(item=>item.foodName.toLowerCase().includes(foodItem.toLowerCase())).map(
                     item =>(

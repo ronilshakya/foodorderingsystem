@@ -9,7 +9,9 @@ import About from "./components/pages/about/About";
 import Administrator from './components/pages/administrator/Administrator';
 import { useState } from "react";
 import AdminLayout from "./components/Layout/AdminLayout";
-import AdminLogin from "./components/pages/administrator/AdminLogin";
+import AddFoodItems from "./components/pages/administrator/AddFoodItems";
+import GetFoodItems from "./components/pages/administrator/GetFoodItems";
+import Profile from "./components/pages/Profile/Profile";
 
 function App() {
   return (
@@ -22,14 +24,16 @@ function App() {
                 <Route path="/sign-up-form" element={<SignUpForm />}/>
 
                 <Route path="/administrator/*" element={<AdminLayout />}>
-                  <Route path="" element={<AdminLogin />}/>
-                  <Route path="user" element={<Administrator />}/>
+                  <Route path="" element={<Administrator />}/>
+                  <Route path="add-food" element={<AddFoodItems />}/>
+                  <Route path="get-food" element={<GetFoodItems />}/>
                 </Route>
 
                 <Route path="/" element={<Layout />}>
                   <Route path="/" element={<Order />} />
                   <Route path="about" element={<About />}/>
                   <Route path="contact" element={<Contact />}/>
+                  <Route path="profile" element={<Profile />}/>
                 </Route>
 
               </Routes>

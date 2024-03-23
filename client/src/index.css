@@ -17,12 +17,10 @@
 .page-template{
     @apply lg:ml-72 ;
     @apply pt-28;
+    @apply px-8;
 }
 .order-btn{
     @apply bg-white;
     @apply px-2;
-    @apply py-1;
-    @apply border-orange-500 ;
-    @apply border-l;
-    @apply border-r;
+    @apply py-2;
 }

@@ -67,7 +67,7 @@ const SignInForm = () => {
                 </div>
                 <div className="p-3 flex flex-col gap-7">
                     <div className="flex flex-col items-center gap-4">
-                        <h1 className="text-4xl">FoodDesk</h1>
+                        <Link to='/'><h1 className="text-4xl">FoodDesk</h1></Link>
                         <div className="flex items-center w-2/5">
                             <hr className="flex-grow border-t border-gray-300" />
                             <span className="px-3 text-gray-500">Sign In</span>
