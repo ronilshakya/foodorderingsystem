@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const AdminBranding = () => {
   return (
-    <h1 className="text-3xl text-orange-500">
+    <h1 className="text-xl md:text-3xl text-orange-500">
         <Link to='/'>FoodDesk Administrator</Link>
     </h1>
   )

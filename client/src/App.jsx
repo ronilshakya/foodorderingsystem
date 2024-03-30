@@ -5,13 +5,13 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Order from "./components/pages/order/Order";
 import { ShopContextProvider } from "./context/shop-context";
 import Contact from "./components/pages/contact/Contact";
-import About from "./components/pages/about/About";
 import Administrator from './components/pages/administrator/Administrator';
 import { useState } from "react";
 import AdminLayout from "./components/Layout/AdminLayout";
 import AddFoodItems from "./components/pages/administrator/AddFoodItems";
 import GetFoodItems from "./components/pages/administrator/GetFoodItems";
 import Profile from "./components/pages/Profile/Profile";
+import CheckoutPopup from "./components/pages/order/order-comp/CheckoutPopup";
 
 function App() {
   return (
@@ -31,7 +31,7 @@ function App() {
 
                 <Route path="/" element={<Layout />}>
                   <Route path="/" element={<Order />} />
-                  <Route path="about" element={<About />}/>
+                  <Route path="/checkout" element={<CheckoutPopup />} />
                   <Route path="contact" element={<Contact />}/>
                   <Route path="profile" element={<Profile />}/>
                 </Route>

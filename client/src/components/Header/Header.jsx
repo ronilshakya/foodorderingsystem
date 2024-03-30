@@ -12,7 +12,7 @@ export default function Header(props) {
     const {isAuthenticated} = useAuth();
     return(
         <div className='fixed w-full z-50'>
-            <div className="theme-main-color flex  justify-between gap-2 items-center h-20 px-12">
+            <div className="theme-main-color flex justify-between gap-2 items-center h-20 px-12">
 
                 {/* responsive sidebar arorw */}
                 <div className=' lg:hidden'>

@@ -36,8 +36,8 @@ const SignInForm = () => {
                 password: password
             };
 
-            await loginUser(userData);
-            navigate('/');
+            
+            await loginUser(userData)
         } catch (error) {
             setFormError("Sign-in failed. Please try again later.");
             console.error("Sign-in failed:", error);
@@ -60,8 +60,8 @@ const SignInForm = () => {
     ));
 
     return (
-        <div className="signup-form container">
-            <div className="flex flex-row max-lg:flex-col items-center justify-center h-lvh gap-4 mx-8">
+        <div className="container">
+            <div className="flex flex-row max-lg:flex-col items-center justify-center h-screen gap-4 mx-8">
                 <div className="overflow-hidden max-lg:w-80 rounded-xl">
                     <img src={burgerImg} alt="burgercover" className="form-img" />
                 </div>
@@ -74,7 +74,7 @@ const SignInForm = () => {
                             <hr className="flex-grow border-t border-gray-300" />
                         </div>
                     </div>
-                    <form className="flex flex-col gap-4" onSubmit={handleSignIn}>
+                    <form className="flex flex-col gap-4 w-96" onSubmit={handleSignIn}>
                         <Input
                             label="Email Address"
                             type="text"
@@ -96,7 +96,7 @@ const SignInForm = () => {
                             <input type="checkbox" id="remember" className="w-4 h-4 text-neutral-200" />
                             <label htmlFor="remember" className="form-text">Remember my preference</label>
                         </div>
-                        <Button width={{ width: '30rem' }} type="submit">Sign Me In</Button>
+                        <Button type="submit">Sign Me In</Button>
                     </form>
                     <div className="flex flex-col items-center gap-4">
                         <div className="flex items-center w-2/5">

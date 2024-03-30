@@ -32,7 +32,8 @@ exports.signup = async (req, res, next) => {
             user:{
                 _id: newUser._id,
                 username: newUser.username,
-                email: newUser.email
+                email: newUser.email,
+                orderHistory: newUser.orderHistory
             }
         });
 
@@ -71,7 +72,8 @@ exports.signin = async (req, res, next) => {
             user:{
                 _id: user._id,
                 username: user.username,
-                email: user.email
+                email: user.email,
+                orderHistory: user.orderHistory
             }
         })
     } catch (error) {
@@ -115,5 +117,64 @@ exports.updateUser = async (req,res,next) =>{
         res.send(updateUser)
     } catch (error) {
         return res.status(400).json({ error: error })
+    }
+}
+
+// add order history
+
+exports.addOrder = async (req, res, next) => {
+    try {
+        const orderHistoryItem = await User.findByIdAndUpdate(
+            req.params.id,
+            { $push: { orderHistory: req.body.orderHistory } },
+            { new: true }
+        );
+
+        if (!orderHistoryItem) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        res.json(orderHistoryItem);
+    } catch (error) {
+        next(error);
+    }
+};
+
+// get OrderHistory of id
+exports.getOrderHistory = async (req,res,next) =>{
+    try {
+        const order = await User.findById(req.params.id,'orderHistory');
+        if(!order){
+            res.status(400).json({error: "User Not Found"})
+        }
+        res.status(200).json(order)
+    } catch (error) {
+        next(error)
+    }
+}
+
+exports.addProfilePic = async(req,res,next)=>{
+    try {
+        const userProfile = await User.findByIdAndUpdate(req.params.id,{
+            profileImage: req.file.filename
+        })
+        if(!userProfile){
+            return res.status(404).json({ error: 'User not found' });
+        }
+        res.status(200).json({ success: true });
+    } catch (error) {
+        console.error('Error uploading image:', error);
+        res.status(500).json({ error: 'Failed to upload image' });
+    }
+}
+
+exports.getProfilePic = async (req,res,next) =>{
+    try {
+        const getImage = await User.findById(req.params.id,'profileImage')
+        if(!getImage){
+            res.status(400).json({message:"User not found"})
+        }
+        res.status(200).json(getImage);
+    } catch (error) {
+        next(error);
     }
 }

@@ -1,7 +1,6 @@
 import React from 'react'
 import ImageCarousel from './ImageCarousel';
 import OrderFoods from './OrderFoods';
-import RecommendedFoodItems from './RecommendedFoodItems';
 import Offers from './Offers';
 
 
@@ -10,10 +9,7 @@ const OrderBody = () => {
     <div>
         <ImageCarousel />
         <div>
-          <OrderFoods foodItem="Burger" />
-          <OrderFoods foodItem="Pizza" />
-          <OrderFoods foodItem="Momo" />
-          <OrderFoods foodItem="Chowmein" />
+          <OrderFoods />
         </div>
         <div>
           <Offers />

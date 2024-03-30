@@ -66,36 +66,42 @@ const Administrator = () => {
 
   return (
     <div className='page-template'>
-      <h1 className='text-2xl'>All Users</h1>
-      <h1 className='text-2xl'>{users.length} Users</h1>
-      <div>
-        <table className=' rounded-xl table w-3/4'>
-          <thead>
-            <tr className=''>
-              <th>SN.</th>
-              <th>Username</th>
-              <th>Email</th>
-              <th>Registration Date</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody className='text-center'>
-            {users.map((user,i) => (
-              <tr key={user._id}>
-                <td>{i+1}</td>
-                <td>{user.username}</td>
-                <td>{user.email}</td>
-                <td>{user.createdAt}</td>
-                <td>
-                  <div className='flex'>
-                    <AdminUpdateButton  onClick={handleUpdate(user._id, user.username)} />
-                    <AdminDeleteButton onClick={handleDelete(user._id, user.username)} />
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <h1 className='text-2xl my-4'>All Users</h1>
+      <h1 className='text-2xl my-4'>{users.length} Users</h1>
+      <div className='flex flex-col'>
+      <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+          <div class="overflow-hidden">
+            <table className='min-w-full text-left text-sm font-semibold text-surface'>
+              <thead className='bg-orange-500 text-white'>
+                <tr>
+                  <th scope="col" className="table-data">SN.</th>
+                  <th scope="col" className="table-data">Username</th>
+                  <th scope="col" className="table-data">Email</th>
+                  <th scope="col" className="table-data">Registration Date</th>
+                  <th scope="col" className="table-data">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {users.map((user,i) => (
+                  <tr key={user._id}>
+                    <td className="table-data whitespace-nowrap">{i+1}</td>
+                    <td className="table-data whitespace-nowrap">{user.username}</td>
+                    <td className="table-data whitespace-nowrap">{user.email}</td>
+                    <td className="table-data whitespace-nowrap">{user.createdAt}</td>
+                    <td className="table-data whitespace-nowrap">
+                      <div className='flex gap-2'>
+                        <AdminUpdateButton  onClick={handleUpdate(user._id, user.username)} />
+                        <AdminDeleteButton onClick={handleDelete(user._id, user.username)} />
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

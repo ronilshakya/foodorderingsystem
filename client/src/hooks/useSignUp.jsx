@@ -35,7 +35,7 @@ const useSignUp = () => {
                 Swal.fire({
                     position: "top-end",
                     icon: "error",
-                    title: `Registration failed`,
+                    title: `${response.data.message}`,
                     showConfirmButton: false,
                     timer: 1000
                 });
@@ -45,7 +45,7 @@ const useSignUp = () => {
             Swal.fire({
                 position: "top-end",
                 icon: "error",
-                title: `Registration failed`,
+                title: `${error}`,
                 showConfirmButton: false,
                 timer: 1000
             });

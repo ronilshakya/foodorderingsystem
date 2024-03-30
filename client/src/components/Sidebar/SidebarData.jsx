@@ -5,10 +5,10 @@ export const sidebarItems = [
     {
         title:"Home / Menu",icon:<MdOutlineDashboard/> ,
         submenu:[
-            {id:1,title:"Burger",url:""},
-            {id:2,title:"Pizza",url:""},
-            {id:3,title:"Momo",url:""},
-            {id:4,title:"Chowmein",url:""},
+            {id:1,title:"Momo",url:""},
+            {id:2,title:"Chowmein",url:""},
+            {id:3,title:"Pizza",url:""},
+            {id:4,title:"Burger",url:""},
         ]
     },
     {
@@ -20,7 +20,6 @@ export const sidebarItems = [
     {
         title:"Info",icon:<IoRestaurantOutline/>,
         submenu:[
-            {id:1 , title: "About",url:"about"},
             {id:2 , title: "Contact",url:"contact"},
         ]
     },

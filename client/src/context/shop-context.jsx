@@ -1,40 +1,57 @@
-import React, { createContext, useState } from 'react'
-import { FoodProductsData } from '../components/pages/order/FoodProductsData';
+import React, { createContext, useState, useEffect } from 'react';
+import useGetAllFoodItems from '../hooks/useGetAllFoodItems';
 
 export const ShopContext = createContext(null);
 
-const getDefaultCart = () => {
-    let cart = {};
-    for(let i = 1; i < FoodProductsData.length + 1; i++){
-        cart[i] = 0;
-    }
-    return cart;
-}
-
 export const ShopContextProvider = (props) => {
-    const [cartItems , setCartItems] = useState(getDefaultCart());
+    const { foods } = useGetAllFoodItems();
+    const [cartItems, setCartItems] = useState(() => {
+        let cart = {};
+        if (foods) { // Ensure foods are fetched before initializing cart
+            for (let food of foods) {
+                cart[food._id] = 0;
+            }
+        }
+        return cart;
+    });
+    
+    useEffect(() => {
+        if (foods) { // Ensure foods are fetched before initializing cart
+            let updatedCart = {};
+            for (let food of foods) {
+                updatedCart[food._id] = 0;
+            }
+            setCartItems(updatedCart);
+        }
+    }, [foods]);
 
-    const getTotalAmount = () =>{
+    const getTotalAmount = () => {
         let totalAmount = 0;
-        for(const item in cartItems){
-            if(cartItems[item]>0){
-                let itemInfo = FoodProductsData.find((product)=>product.id===Number(item));
-                totalAmount += cartItems[item] * itemInfo.price; 
+        for (const item in cartItems) {
+            if (cartItems[item] > 0) {
+                let itemInfo = foods.find((product) => product._id === item);
+                totalAmount += cartItems[item] * itemInfo.price;
             }
         }
         return totalAmount;
     }
 
-    const addToCart = (itemId) =>{
-        setCartItems((prev)=>({...prev, [itemId]: prev[itemId] + 1}));
+    const addToCart = (itemId) => {
+        setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
     }
-    const removeFromCart = (itemId) =>{
-        setCartItems((prev)=>({...prev, [itemId]: prev[itemId] - 1}));
+
+    const removeFromCart = (itemId) => {
+        setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
     }
-    const contextValue = {cartItems,addToCart,removeFromCart,getTotalAmount};
-  return (
-    <ShopContext.Provider value={contextValue}>
-        {props.children}
-    </ShopContext.Provider>
-  )
+
+    const contextValue = { cartItems, addToCart, removeFromCart, getTotalAmount };
+
+    if (!foods) {
+        return <div>Loading...</div>; // Placeholder for loading indicator
+    }
+    return (
+        <ShopContext.Provider value={contextValue}>
+            {props.children}
+        </ShopContext.Provider>
+    )
 }

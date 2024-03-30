@@ -112,7 +112,7 @@ const SignUpForm = () => {
     
 
     return (
-        <div className="bg-orange-50 h-lvh w-full flex items-center justify-center">
+        <div className="bg-orange-50 h-screen w-full flex items-center justify-center">
             <div className="bg-white shadow-lg p-8 flex flex-col gap-7">
                 <div className="flex flex-col items-center gap-4">
                     <Link to='/'><h1 className="text-4xl">FoodDesk</h1></Link>
@@ -122,7 +122,7 @@ const SignUpForm = () => {
                         <hr className="flex-grow border-t border-gray-300" />
                     </div>
                 </div>
-                <form className="flex flex-col gap-4">
+                <form className="flex flex-col gap-4 w-96">
                     <Input
                         label="Username"
                         type="text"

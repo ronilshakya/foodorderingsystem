@@ -82,35 +82,47 @@ const GetFoodItems = () => {
 
   return (
     <div className='page-template'>
-      <table>
-        <thead>
-          <tr>
-            <th>Food name</th>
-            <th>Food price</th>
-            <th>Food category</th>
-            <th>Food image</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            foods.map((item,i)=>(
-              <tr key={i+1}>
-                <td>{item.name}</td>
-                <td>{item.price}</td>
-                <td>{item.category}</td>
-                <td><img src={`http://localhost:8000/images/${item.image}`} className='w-10' alt="img" /></td>
-                <td>
-                  <div className='flex'>
-                    <AdminUpdateButton  onClick={handleUpdate(item._id)} />
-                    <AdminDeleteButton onClick={handleDelete(item._id, item.name)} />
-                  </div>
-                </td>
-              </tr>
-            ))
-          }
-        </tbody>
-      </table>
+      <h1 className='text-2xl my-4'>All Foods</h1>
+      <h1 className='text-2xl my-4'>Total Foods: {foods.length}</h1>
+      <div className='flex flex-col'>
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+            <div class="overflow-hidden">
+              <table className='min-w-full text-left text-sm font-semibold text-surface'>
+                <thead className='bg-orange-500 text-white'>
+                  <tr>
+                    <th scope="col" className="table-data">SN.</th>
+                    <th scope="col" className="table-data">Food name</th>
+                    <th scope="col" className="table-data">Food price</th>
+                    <th scope="col" className="table-data">Food category</th>
+                    <th scope="col" className="table-data">Food image</th>
+                    <th scope="col" className="table-data">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    foods.map((item,i)=>(
+                      <tr key={i+1} className=''>
+                        <td className="table-data whitespace-nowrap">{i+1}</td>
+                        <td className="table-data whitespace-nowrap">{item.name}</td>
+                        <td className="table-data whitespace-nowrap">{item.price}</td>
+                        <td className="table-data whitespace-nowrap">{item.category}</td>
+                        <td className="table-data whitespace-nowrap"><img src={`http://localhost:8000/images/${item.image}`} className='w-10' alt="img" /></td>
+                        <td className="table-data whitespace-nowrap">
+                          <div className='flex gap-2'>
+                            <AdminUpdateButton  onClick={handleUpdate(item._id)} />
+                            <AdminDeleteButton onClick={handleDelete(item._id, item.name)} />
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

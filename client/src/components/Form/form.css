@@ -1,6 +1,4 @@
-.signup-form{
-    @apply max-lg:my-7
-}
+
 .form-img{
     width: 800px;
     @apply h-auto;

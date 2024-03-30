@@ -16,11 +16,16 @@
 }
 .page-template{
     @apply lg:ml-72 ;
-    @apply pt-28;
-    @apply px-8;
+    @apply pt-24;
+    @apply pb-10;
+    @apply mr-8;
+    @apply max-lg:ml-8;
 }
 .order-btn{
     @apply bg-white;
-    @apply px-2;
-    @apply py-2;
+    @apply px-1;
+    @apply py-1;
+}
+.table-data{
+    @apply px-6 py-4;
 }

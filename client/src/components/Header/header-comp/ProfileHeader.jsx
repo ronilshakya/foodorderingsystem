@@ -9,11 +9,17 @@ import logoutImg from '../img/logout.png';
 import mailImg from '../img/mail.png';
 import notificationImg from '../img/notification.png';
 import useAuth from '../../../context/authContext';
+import useGetProfilePic from '../../../hooks/useGetProfilePic';
+import { useEffect } from 'react';
+import LoadingSpinner from '../../../assets/Spinner-1s-200px.svg';
 
 
 const ProfileHeader = () => {
     const [navOpen, setNavOpen] = useState(false);
     const {userData, logout} = useAuth();
+    const {userImage,getProfilePic} = useGetProfilePic();
+    const [isLoading, setIsLoading] = useState(true);
+
     
     const triggerNavOpen = () =>{
         setNavOpen(!navOpen);
@@ -25,18 +31,30 @@ const ProfileHeader = () => {
     const menuList = menu.map(
         (item, index) =>(
             <li key={index}>
-                <Link to={item.url} onClick={item.onClick} className='px-4 py-2 w-36 flex gap-2  hover:bg-neutral-200'>
+                <Link to={item.url} onClick={()=>{item.onClick(); triggerNavOpen()}} className='px-4 py-2 w-36 flex gap-2  hover:bg-neutral-200'>
                     <img src={item.icon} alt="icon" className='w-5'/>
                     <p className='text-neutral-600 text-sm font-semibold'>{item.title}</p>
                 </Link>
             </li>
         )
     )
+    useEffect(()=>{
+        getProfilePic(userData._id)
+        .then(setIsLoading(false))
+        .catch((error) => {
+            console.error('Error fetching profile picture:', error);
+            setIsLoading(false);
+        });
+    },[getProfilePic,userData])
   return (
     <div className={``}>
                 <div className={`flex items-center gap-2 px-4 py-2 w-36  cursor-pointer ${navOpen ? "bg-white rounded-t-md transition duration-300": "theme-light-color rounded-md transition duration-300" }`} onClick={triggerNavOpen}>
                     <div className="rounded-full ring-2 ring-white overflow-hidden w-9 h-9">
-                        <img src={profPic} className="w-20" alt="profilepic" />
+                    {isLoading?(
+                        <img src={LoadingSpinner} alt="spinner" className='w-20' />
+                    ):(
+                        <img src={`http://localhost:8000/userprofile/${userImage.profileImage}`} className="w-20" alt="profilepic" />
+                    )}
                     </div>
                     <h1 className={`${navOpen ? "text-black" : "text-white"} font-semibold select-none `}>{userData.username}</h1>
                     <img 
