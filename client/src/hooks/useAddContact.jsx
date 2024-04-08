@@ -24,13 +24,7 @@ const useAddContact = () => {
                 })
             }
         } catch (error) {
-            Swal.fire({
-                position: "top-end",
-                icon: "error",
-                title: `Something went wrong ${error}`,
-                showConfirmButton: false,
-                timer: 1000
-            })
+            console.log(error);
         }
     };
 

@@ -7,6 +7,7 @@ require('dotenv').config();
 const authRouter = require('./routes/authRoute')
 const foodRouter = require('./routes/foodRoute')
 const contactRouter = require('./routes/contactRoute')
+const carouselRouter = require('./routes/carouselRoute')
 
 // env
 const port = process.env.PORT;
@@ -25,6 +26,7 @@ db.once('open',() => {console.log("Database connection success")})
 app.use('/api/auth', authRouter)
 app.use('/food', foodRouter)
 app.use('/contact', contactRouter)
+app.use('/carousel', carouselRouter)
 app.use(express.static('public'))
 
 app.listen(port,()=>{

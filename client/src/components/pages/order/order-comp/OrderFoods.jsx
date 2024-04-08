@@ -3,6 +3,7 @@ import useGetAllFoodItems from '../../../../hooks/useGetAllFoodItems';
 import Button from '../../../template/Button';
 import { ShopContext } from '../../../../context/shop-context';
 import LoadingSpinner from '../../../../assets/Spinner-1s-200px.svg';
+import Burger from '../../../../assets/burger.jpg'
 
 
 const OrderFoods = () => {

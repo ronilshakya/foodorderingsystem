@@ -49,7 +49,7 @@ const UserInfo = (props) => {
   return (
     <>
         <h1 className='text-xl my-5'>User Info</h1>
-        <div className='flex flex-col lg:flex-row justify-center gap-8 items-center border border-neutral-300 rounded-xl px-4 py-6'>
+        <div className='flex flex-col md:flex-row justify-center gap-8 items-center border border-neutral-300 rounded-xl px-4 py-6'>
             <div className='flex flex-col items-center'>
                 <div className='ring-2 ring-neutral-300 w-32 h-32 overflow-hidden rounded-full mb-4'>
                     {isLoading?(

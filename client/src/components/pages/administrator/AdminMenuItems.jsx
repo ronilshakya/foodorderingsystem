@@ -33,5 +33,15 @@ export const sidebarItems = [
                 url: "get-contact-us-inquiries"
             }
         ]
+    },
+    {
+        title:"Media",
+        submenu:[
+            {
+                id:1,
+                title: "Carousel Images",
+                url: "carousel-administrator"
+            }
+        ]
     }
 ];

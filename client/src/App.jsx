@@ -13,6 +13,7 @@ import GetFoodItems from "./components/pages/administrator/GetFoodItems";
 import Profile from "./components/pages/Profile/Profile";
 import CheckoutPopup from "./components/pages/order/order-comp/CheckoutPopup";
 import ContactUsInquiries from "./components/pages/administrator/ContactUsInquiries";
+import CarouselAdministrator from "./components/pages/administrator/CarouselAdministrator";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
                   <Route path="add-food" element={<AddFoodItems />}/>
                   <Route path="get-food" element={<GetFoodItems />}/>
                   <Route path="get-contact-us-inquiries" element={<ContactUsInquiries />}/>
+                  <Route path="carousel-administrator" element={<CarouselAdministrator />}/>
                 </Route>
 
                 <Route path="/" element={<Layout />}>
