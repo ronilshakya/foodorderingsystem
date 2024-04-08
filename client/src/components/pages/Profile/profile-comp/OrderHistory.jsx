@@ -1,6 +1,11 @@
-import React from 'react'
+import React,{useState} from 'react'
+import Button from '../../../template/Button'
 
 const OrderHistory = (props) => {
+  const [showAll, setShowAll] = useState(false);
+  const toggleShowAll = () =>{
+    setShowAll(!showAll);
+  }
   return (
     <>
     <div>
@@ -8,7 +13,7 @@ const OrderHistory = (props) => {
         {props.orderHistoryObject.orderHistory === undefined ? (
           <h1>No orders placed</h1>
         ) : (
-          props.orderHistoryObject.orderHistory.slice().reverse().map((obj, i) => {
+          props.orderHistoryObject.orderHistory.slice(0, showAll ? props.orderHistoryObject.orderHistory.length : 4).reverse().map((obj, i) => {
             const orderStringObject = new Date(obj.orderTime);
             const orderDateTime = orderStringObject.toLocaleString();
             const orderDay = orderStringObject.getDay();
@@ -37,7 +42,7 @@ const OrderHistory = (props) => {
                     return (
                         <tbody key={item._id} className='text-center'>
                           <tr className='border-none'>
-                            <td className='border-none flex justify-center'><img src={`http://localhost:8000/images/${item.image}`} className='w-20' alt="checkout" /></td>                        
+                            <td className='border-none flex justify-center'><img src={`${import.meta.env.VITE_BASE_URL}/images/${item.image}`} className='w-20' alt="checkout" /></td>                        
                             <td className='border-none'><h1>{item.name}</h1></td>
                             <td className='border-none'><h1>{obj[item._id]}</h1></td>
                             <td className='border-none'><h1>Rs. {subTotal}</h1></td>
@@ -50,13 +55,20 @@ const OrderHistory = (props) => {
                   <tr className='border-none'>
                     <td colSpan='3' className='border-none'></td>
                     <td className='border-none text-center'>
-                      <h1 className='text-lg border-t-2 border-orange-500 text-orange-500 font-semibold p-2'>Grand Total: Rs. {totalPriceForOrder}</h1>
+                      <h1 className='text-lg border-t-2 border-orange-500 text-orange-500 font-semibold p-2'>Total: Rs. {totalPriceForOrder}</h1>
                     </td>
                   </tr>
                 </tfoot>
                 </table>
             </div>
           )})
+        )}
+        {props.orderHistoryObject.orderHistory.length > 4 &&(
+          <div className='text-center'>
+            <Button onClick={toggleShowAll}>
+              {showAll ? 'Show Less' : 'Show more'}
+            </Button>
+          </div>
         )}
       </div>
     </>

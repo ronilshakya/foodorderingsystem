@@ -85,7 +85,7 @@ const GetFoodItems = () => {
       <h1 className='text-2xl my-4'>All Foods</h1>
       <h1 className='text-2xl my-4'>Total Foods: {foods.length}</h1>
       <div className='flex flex-col'>
-        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="overflow-x-auto sm:mx-6 lg:mx-8">
           <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
             <div class="overflow-hidden">
               <table className='min-w-full text-left text-sm font-semibold text-surface'>
@@ -107,7 +107,7 @@ const GetFoodItems = () => {
                         <td className="table-data whitespace-nowrap">{item.name}</td>
                         <td className="table-data whitespace-nowrap">{item.price}</td>
                         <td className="table-data whitespace-nowrap">{item.category}</td>
-                        <td className="table-data whitespace-nowrap"><img src={`http://localhost:8000/images/${item.image}`} className='w-10' alt="img" /></td>
+                        <td className="table-data whitespace-nowrap"><img src={`${import.meta.env.VITE_BASE_URL}/images/${item.image}`} className='w-10' alt="img" /></td>
                         <td className="table-data whitespace-nowrap">
                           <div className='flex gap-2'>
                             <AdminUpdateButton  onClick={handleUpdate(item._id)} />

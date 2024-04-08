@@ -1,16 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import AdminUpdateButton from '../../template/AdminUpdateButton';
 import AdminDeleteButton from '../../template/AdminDeleteButton';
+import { FaHistory } from "react-icons/fa";
 import useGetAllUsers from '../../../hooks/useGetAllUsers';
 import './admin.css'
 import useRemoveUser from '../../../hooks/useRemoveUser';
 import useUpdateUser from '../../../hooks/useUpdateUser';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
+import OrderModal from './admin-comp/OrderModal';
 
 const Administrator = () => {
   const {users, getAllUsers} = useGetAllUsers();
   const {removeUser} = useRemoveUser(getAllUsers);
   const {updateUser, updatedUser} = useUpdateUser();
+  const [openedModal, setOpenedModal] = useState(false);
+  const [modalUser, setModalUser] = useState({});
+
+  const openModal = (user) =>{
+    setOpenedModal(true);
+    setModalUser(user)
+  }
+  
+  const closeModal = () =>{
+    setOpenedModal(false);
+  }
 
   useEffect(()=>{
     if(updatedUser){
@@ -58,7 +72,7 @@ const Administrator = () => {
         const newUsername = {
           username: result.value
         };
-        updateUser(id, newUsername); // Using the id parameter passed to handleUpdate
+        updateUser(id, newUsername); 
       }
     });
   };
@@ -79,23 +93,32 @@ const Administrator = () => {
                   <th scope="col" className="table-data">Username</th>
                   <th scope="col" className="table-data">Email</th>
                   <th scope="col" className="table-data">Registration Date</th>
+                  <th scope="col" className="table-data">User Image</th>
                   <th scope="col" className="table-data">Action</th>
                 </tr>
               </thead>
               <tbody>
                 {users.map((user,i) => (
-                  <tr key={user._id}>
-                    <td className="table-data whitespace-nowrap">{i+1}</td>
-                    <td className="table-data whitespace-nowrap">{user.username}</td>
-                    <td className="table-data whitespace-nowrap">{user.email}</td>
-                    <td className="table-data whitespace-nowrap">{user.createdAt}</td>
-                    <td className="table-data whitespace-nowrap">
-                      <div className='flex gap-2'>
-                        <AdminUpdateButton  onClick={handleUpdate(user._id, user.username)} />
-                        <AdminDeleteButton onClick={handleDelete(user._id, user.username)} />
-                      </div>
-                    </td>
-                  </tr>
+                    <tr key={user._id}>
+                      <td className="table-data whitespace-nowrap">{i+1}</td>
+                      <td className="table-data whitespace-nowrap">{user.username}</td>
+                      <td className="table-data whitespace-nowrap">{user.email}</td>
+                      <td className="table-data whitespace-nowrap">{user.createdAt}</td>
+                      <td className="table-data whitespace-nowrap">
+                        <div className='ring-1 ring-orange-500 rounded-full w-12 h-12 overflow-hidden'>
+                          <img className='w-20' src={`${import.meta.env.VITE_BASE_URL}/userprofile/${user.profileImage}`} alt="profile" />
+                        </div>
+                      </td>
+                      <td className="table-data whitespace-nowrap">
+                        <div className='flex gap-2'>
+                          <AdminUpdateButton  onClick={handleUpdate(user._id, user.username)} />
+                          <AdminDeleteButton onClick={handleDelete(user._id, user.username)} />
+                          <button onClick={()=>openModal(user)} className='border bg-orange-600 py-1 px-2 rounded-lg text-white font-semibold flex items-center gap-1 justify-center'>
+                            <FaHistory />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
                 ))}
               </tbody>
             </table>
@@ -103,6 +126,11 @@ const Administrator = () => {
           </div>
         </div>
       </div>
+      {openedModal ? (
+        <>
+          <OrderModal modalUser={modalUser} closeModal={closeModal} />
+        </>
+      ):(<></>)}
     </div>
   );
 };

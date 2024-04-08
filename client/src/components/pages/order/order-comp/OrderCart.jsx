@@ -5,26 +5,47 @@ import useGetAllFoodItems from '../../../../hooks/useGetAllFoodItems'
 import { ShopContext } from '../../../../context/shop-context'
 import { useContext, useState } from 'react'
 import CheckoutPopup from './CheckoutPopup'
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import useAuth from '../../../../context/authContext'
+import Swal from 'sweetalert2'
 
 const OrderCart = () => {
   const {foods} = useGetAllFoodItems();
   const {cartItems,addToCart,removeFromCart,getTotalAmount} = useContext(ShopContext);
   let totalAmount = getTotalAmount();
+  const {isAuthenticated} = useAuth();
+  const navigate = useNavigate();
 
-  // checkout popup
+  const handleCheckout = () =>{
+    if(isAuthenticated){
+      navigate('/checkout')
+    }else{
+      Swal.fire({
+        icon: "error",
+        title: `Please sign in first!`,
+        showConfirmButton: true,
+        showCancelButton: true,
+        confirmButtonText:'Proceed to sign in',
+        confirmButtonColor:'#F97316',
+        focusConfirm: false,
+        cancelButtonText:'Cancel'
+    }).then((result)=>{
+      if(result.isConfirmed){
+        navigate('/sign-in-form')
+      }else{
+        navigate('/')
+      }
+    })
+    }
+  }
+
   return (
-    <div className='px-2 font-semibold'>
+    <div className='px-2 font-semibold max-md:mt-4'>
       <div className='flex flex-col items-center static lg:fixed gap-3 py-5 px-4 rounded-lg border border-orange-500 custom-light-color'>
 
             <div className='theme-main-color px-8 py-2 rounded-lg'>
               <h1 className='text-lg text-white'>My Orders</h1>
             </div>
-        
-            {/* <div className='flex items-center gap-1 border border-orange-500 bg-white rounded-lg p-2'>
-                <img src={check} className='w-4' alt="check" />
-                <h2>Delivery</h2>
-            </div> */}
 
             {Object.values(cartItems).every(value=> value ===0) ?
                 (
@@ -43,7 +64,7 @@ const OrderCart = () => {
                                 return(
                                   <div key={item._id} className='grid grid-cols-4 mt-1 items-center p-2 my-3'>
                                     <div className='border border-orange-500 bg-white rounded-2xl overflow-hidden'>
-                                      <img src={`http://localhost:8000/images/${item.image}`} className='w-20' alt="foodimg" />
+                                      <img src={`${import.meta.env.VITE_BASE_URL}/images/${item.image}`} className='w-20' alt="foodimg" />
                                     </div>
                                     <div className='col-span-2 px-3'>
                                       <h1 className='text-md'>{item.name}</h1>
@@ -68,9 +89,8 @@ const OrderCart = () => {
                             <h1 className='text-xl text-orange-500'>Rs. {totalAmount}</h1>
                           </div>
                           <div className='text-center'>
-                            <Link to='/checkout'>
-                              <Button width={{width:'90%'}}>Checkout order</Button>
-                            </Link>
+                              <Button width={{width:'90%'}} onClick={handleCheckout}>Checkout order</Button>
+                         
                           </div>
                         </div>
                       </div>

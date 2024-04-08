@@ -1,19 +1,18 @@
 import React from 'react';
-import { useState } from 'react';;
+import { useState, useEffect } from 'react';;
 import searchImg from '../img/magnifying-glass.png';
+import useGetAllFoodItems from '../../../hooks/useGetAllFoodItems'
 
-const fooditems = [
-    'Pizza',
-    'Burger',
-    'Momo',
-    'Chowmein',
-    'Chicken',
-    'Bakery',
-    'Beverage'
-]
 
 const Searchbar = () => {
     const [inputOpen, setInputOpen] = useState(false);
+    const {foods} = useGetAllFoodItems();
+    const [scrollTarget, setScrollTarget] = useState(null);
+
+    // food categories to search
+    const fooditems = foods.map(item => item.category).filter((item, index, arr) => 
+        arr.indexOf(item) === index
+    );
     const triggerInputOpen = () =>{
         setInputOpen(!inputOpen);
     }
@@ -30,6 +29,20 @@ const Searchbar = () => {
         )
         setFilteredItems(filtered);
    } 
+
+    useEffect(()=>{
+        if(scrollTarget){
+            const scrollOffset = 100; 
+            const topPos = scrollTarget.getBoundingClientRect().top + window.scrollY - scrollOffset;
+            window.scrollTo({ top: topPos, behavior: 'smooth' });
+        }
+    },[scrollTarget]);
+    const scrollToElement = (id) =>{
+        const element = document.getElementById(id);
+        setScrollTarget(element);
+        props.triggerSidebar();
+    }
+
   return (
     <div className='search-bar'>
                 <div className={`flex items-center align-middle gap-1 px-2 theme-light-color max-lg:hidden ${inputOpen ? " rounded-t-md": " rounded-md" }`}>
@@ -48,7 +61,7 @@ const Searchbar = () => {
                             {searchRs && (
                                 <div>
                                     {filteredItems.map((item,index)=>
-                                    <li key={index} className='border border-neutral-200 inline-block p-2 rounded-full cursor-pointer text-neutral-500 font-semibold hover:bg-neutral-200'>
+                                    <li key={index} onClick={()=>scrollToElement(item)} className='border border-neutral-200 inline-block p-2 rounded-full cursor-pointer text-neutral-500 font-semibold hover:bg-neutral-200'>
                                         {item}
                                     </li>)}
                                 </div>

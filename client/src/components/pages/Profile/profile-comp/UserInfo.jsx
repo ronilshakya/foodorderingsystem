@@ -55,7 +55,7 @@ const UserInfo = (props) => {
                     {isLoading?(
                         <img src={LoadingSpinner} alt="spinner" className='w-32' />
                     ):(
-                        <img src={`http://localhost:8000/userprofile/${userImage.profileImage}`} className='w-32' alt="prof" />
+                        <img src={`${import.meta.env.VITE_BASE_URL}/userprofile/${userImage.profileImage}`} className='w-32' alt="prof" />
                     )}
                 </div>
                 <form onSubmit={handleFormSubmission} className='flex flex-col items-center'  encType='multipart/form-data'>

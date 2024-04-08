@@ -53,7 +53,7 @@ const ProfileHeader = () => {
                     {isLoading?(
                         <img src={LoadingSpinner} alt="spinner" className='w-20' />
                     ):(
-                        <img src={`http://localhost:8000/userprofile/${userImage.profileImage}`} className="w-20" alt="profilepic" />
+                        <img src={`${import.meta.env.VITE_BASE_URL}/userprofile/${userImage.profileImage}`} className="w-20" alt="profilepic" />
                     )}
                     </div>
                     <h1 className={`${navOpen ? "text-black" : "text-white"} font-semibold select-none `}>{userData.username}</h1>

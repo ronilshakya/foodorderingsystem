@@ -12,6 +12,7 @@ import AddFoodItems from "./components/pages/administrator/AddFoodItems";
 import GetFoodItems from "./components/pages/administrator/GetFoodItems";
 import Profile from "./components/pages/Profile/Profile";
 import CheckoutPopup from "./components/pages/order/order-comp/CheckoutPopup";
+import ContactUsInquiries from "./components/pages/administrator/ContactUsInquiries";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
                   <Route path="" element={<Administrator />}/>
                   <Route path="add-food" element={<AddFoodItems />}/>
                   <Route path="get-food" element={<GetFoodItems />}/>
+                  <Route path="get-contact-us-inquiries" element={<ContactUsInquiries />}/>
                 </Route>
 
                 <Route path="/" element={<Layout />}>

@@ -12,12 +12,6 @@ export const sidebarItems = [
         ]
     },
     {
-        title:"Offers",
-        icon:<MdOutlineLocalOffer/>,
-        submenu:[
-            {id:1, title:"10%Offer",url:""}
-        ]},
-    {
         title:"Info",icon:<IoRestaurantOutline/>,
         submenu:[
             {id:2 , title: "Contact",url:"contact"},

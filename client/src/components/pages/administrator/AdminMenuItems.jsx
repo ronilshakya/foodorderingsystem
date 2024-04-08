@@ -23,5 +23,15 @@ export const sidebarItems = [
                 url: "get-food"
             }
         ]
+    },
+    {
+        title: "Inquiries",
+        submenu:[
+            {
+                id:1,
+                title: "Contact us",
+                url: "get-contact-us-inquiries"
+            }
+        ]
     }
 ];
