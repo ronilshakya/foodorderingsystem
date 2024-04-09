@@ -19,7 +19,7 @@ const Contact = () => {
         title: 'Please fill all the fields',
         icon: 'error'
       });
-      return; 
+      return false; 
     }
 
     if (name.match(/[0-9]/)) {
@@ -27,7 +27,7 @@ const Contact = () => {
         title: 'Name should not contain numbers',
         icon: 'error'
       });
-      return; 
+      return false; 
     }
 
     if (!email.match(/^[a-zA-Z0-9._]+@[a-zA-Z]+\.[a-zA-Z]{2,4}$/)) {
@@ -35,7 +35,7 @@ const Contact = () => {
         title: 'Invalid Email Address',
         icon: 'error'
       });
-      return; 
+      return false; 
     }
 
     const newContact = {

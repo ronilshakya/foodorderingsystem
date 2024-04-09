@@ -3,6 +3,7 @@ import Input from '../../template/Input';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import useSignUp from '../../../hooks/useSignUp';
+import logo from '../../../assets/horizontallogo.png'
 
 const SignUpForm = () => {
     const {loading,error,registerUser} = useSignUp();
@@ -113,12 +114,12 @@ const SignUpForm = () => {
 
     return (
         <div className="bg-orange-50 h-screen w-full flex items-center justify-center">
-            <div className="bg-white shadow-lg p-8 flex flex-col gap-7">
+            <div className="bg-white shadow-lg px-8 py-6 flex flex-col gap-7">
                 <div className="flex flex-col items-center gap-4">
-                    <Link to='/'><h1 className="text-4xl">FoodDesk</h1></Link>
+                    <Link to='/'><img src={logo} alt="logo" /></Link>
                     <div className="flex items-center w-3/5">
                         <hr className="flex-grow border-t border-gray-300" />
-                        <span className="px-3 text-gray-500">Sign up your account</span>
+                        <span className="px-3 font-semibold text-gray-500">Sign up your account</span>
                         <hr className="flex-grow border-t border-gray-300" />
                     </div>
                 </div>

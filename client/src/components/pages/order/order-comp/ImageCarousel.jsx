@@ -43,12 +43,12 @@ const ImageCarousel = () => {
                         ))}
                     </div>
                     
-                    <button onClick={prevSlide} className='absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none'>
+                    <button onClick={prevSlide} className='absolute top-0 start-0 z-20 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none'>
                         <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/80 group-hover:bg-white/100 group-focus:outline-none">
                             <IoIosArrowBack />
                         </span>
                     </button>
-                    <button onClick={nextSlide} className='absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none'>
+                    <button onClick={nextSlide} className='absolute top-0 end-0 z-20 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none'>
                         <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/80 group-hover:bg-white/100 group-focus:outline-none">
                             <IoIosArrowForward />
                         </span>

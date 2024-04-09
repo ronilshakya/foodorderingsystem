@@ -8,6 +8,7 @@ import fbImg from './img/facebook.png';
 import glImg from './img/google.png';
 import Button from '../../template/Button';
 import useLogin from '../../../hooks/useLogin';
+import logo from '../../../assets/horizontallogo.png'
 
 const mediaLogin = [
     { name: 'Google', src: glImg },
@@ -65,12 +66,12 @@ const SignInForm = () => {
                 <div className="overflow-hidden max-lg:w-80 rounded-xl">
                     <img src={burgerImg} alt="burgercover" className="form-img" />
                 </div>
-                <div className="p-3 flex flex-col gap-7">
+                <div className="p-3 flex flex-col gap-4">
                     <div className="flex flex-col items-center gap-4">
-                        <Link to='/'><h1 className="text-4xl">FoodDesk</h1></Link>
+                        <Link to='/'><img src={logo} alt="logo" /></Link>
                         <div className="flex items-center w-2/5">
                             <hr className="flex-grow border-t border-gray-300" />
-                            <span className="px-3 text-gray-500">Sign In</span>
+                            <span className="px-3 font-semibold text-gray-500">Sign In</span>
                             <hr className="flex-grow border-t border-gray-300" />
                         </div>
                     </div>
