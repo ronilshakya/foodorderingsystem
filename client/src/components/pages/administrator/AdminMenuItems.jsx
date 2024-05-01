@@ -6,6 +6,11 @@ export const sidebarItems = [
                 id: 1,
                 title: "All Users",
                 url: "",
+            },
+            {
+                id: 2,
+                title: "Order Status",
+                url: "order-status",
             }
         ]
     },

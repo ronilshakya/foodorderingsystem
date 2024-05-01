@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useRef, useEffect } from 'react';
 import Input from '../../template/Input';
 import Button from '../../template/Button';
 import Swal from 'sweetalert2';
@@ -60,6 +60,7 @@ const Contact = () => {
     setSubject('');
     setMessage('');
   };
+
 
   return (
     <div className='page-template'>

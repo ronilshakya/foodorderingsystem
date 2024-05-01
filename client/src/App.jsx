@@ -14,6 +14,8 @@ import Profile from "./components/pages/Profile/Profile";
 import CheckoutPopup from "./components/pages/order/order-comp/CheckoutPopup";
 import ContactUsInquiries from "./components/pages/administrator/ContactUsInquiries";
 import CarouselAdministrator from "./components/pages/administrator/CarouselAdministrator";
+import PageNotFound from "./components/pages/404/PageNotFound";
+import OrderStatus from "./components/pages/administrator/OrderStatus";
 
 function App() {
   return (
@@ -31,6 +33,7 @@ function App() {
                   <Route path="get-food" element={<GetFoodItems />}/>
                   <Route path="get-contact-us-inquiries" element={<ContactUsInquiries />}/>
                   <Route path="carousel-administrator" element={<CarouselAdministrator />}/>
+                  <Route path="order-status" element={<OrderStatus />}/>
                 </Route>
 
                 <Route path="/" element={<Layout />}>
@@ -39,7 +42,7 @@ function App() {
                   <Route path="contact" element={<Contact />}/>
                   <Route path="profile" element={<Profile />}/>
                 </Route>
-
+                <Route path="*" element={<PageNotFound />}/>
               </Routes>
             </div>
           </Router>

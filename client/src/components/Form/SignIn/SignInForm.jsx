@@ -16,8 +16,7 @@ const mediaLogin = [
 ];
 
 const SignInForm = () => {
-    const navigate = useNavigate();
-    const { error, loading, loginUser } = useLogin();
+    const { loginUser } = useLogin();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

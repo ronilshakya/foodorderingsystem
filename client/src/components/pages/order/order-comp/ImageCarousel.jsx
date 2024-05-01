@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { GoDotFill } from "react-icons/go";
 import { IoIosArrowBack, IoIosArrowForward  } from "react-icons/io";
 import useGetCarouselImage from '../../../../hooks/useGetCarouselImage';
+import loadingSpinner from '../../../../assets/Spinner-1s-200px.svg'
 
 const ImageCarousel = () => {
-    const {getCarouselImagefunction, getCarouselImages} = useGetCarouselImage();
+    const {getCarouselImagefunction, getCarouselImages, loading} = useGetCarouselImage();
 
     useEffect(()=>{
         getCarouselImagefunction()
@@ -35,7 +36,11 @@ const ImageCarousel = () => {
                                 {current === index && (
                                     <div>
                                         <div className=''>
-                                            <img src={`${import.meta.env.VITE_BASE_URL}/carousel/${slide.carouselImage}`} alt="image" className='rounded-xl absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2' />
+                                            {loading ? (
+                                                <img src={loadingSpinner} alt="image" className='rounded-xl absolute block  -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2' />
+                                            ):(
+                                                <img src={`${import.meta.env.VITE_BASE_URL}/carousel/${slide.carouselImage}`} alt="image" className='rounded-xl absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2' />
+                                            )}
                                         </div>
                                     </div>
                                 )}

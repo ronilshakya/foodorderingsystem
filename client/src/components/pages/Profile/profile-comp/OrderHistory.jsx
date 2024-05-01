@@ -10,11 +10,10 @@ const OrderHistory = (props) => {
     <>
     <div>
         <h1 className='text-xl my-5'>Order History</h1>
-        {props.orderHistoryObject.orderHistory === undefined ? (
+        {!props.orderHistoryObject.orderHistory ? (
           <h1>No orders placed</h1>
         ) : (
-          props.orderHistoryObject.orderHistory.slice(0, showAll ? props.orderHistoryObject.orderHistory.length : 4).reverse().map((obj, i) => {
-            const orderStringObject = new Date(obj.orderTime);
+          (props.orderHistoryObject.orderHistory || []).slice(0, showAll ? props.orderHistoryObject.orderHistory.length : 4).reverse().map((obj, i) => {            const orderStringObject = new Date(obj.orderTime);
             const orderDateTime = orderStringObject.toLocaleString();
             const orderDay = orderStringObject.getDay();
             const weekDays = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -63,7 +62,7 @@ const OrderHistory = (props) => {
             </div>
           )})
         )}
-        {props.orderHistoryObject.orderHistory.length > 4 &&(
+        {props.orderHistoryObject.orderHistory && props.orderHistoryObject.orderHistory.length > 4 &&(
           <div className='text-center'>
             <Button onClick={toggleShowAll}>
               {showAll ? 'Show Less' : 'Show more'}

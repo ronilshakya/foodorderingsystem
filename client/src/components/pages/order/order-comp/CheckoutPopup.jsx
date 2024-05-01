@@ -38,7 +38,7 @@ const CheckoutPopup = () => {
     return (
         <div className='page-template'>
             <div className='md:p-8'>
-            <div className='flex flex-col gap-4'>
+            <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
                 <div className='flex flex-col justify-center p-5'>
                     <h1 className='text-xl'>Your Order</h1>
                     <div className='flex flex-col'>
@@ -89,7 +89,7 @@ const CheckoutPopup = () => {
                             </div>
                     </div>
                 </div>
-                <div className='p-5 flex flex-col justify-center'>
+                <div className='p-5 flex flex-col justify-evenly'>
                     <div className='flex flex-col my-4 gap-4'>
                         <h1 className='text-xl'>Billing Address</h1>
                         <Input type='number' placeholder='Enter Phone Number'/>
@@ -103,16 +103,16 @@ const CheckoutPopup = () => {
                             <option value="">Khalti</option>
                         </select>
                     </div>
+                    <div className='flex gap-4 my-6 justify-center col-span-2'>
+                        <Button onClick={handleCheckout}>Proceed To Checkout</Button>
+                        <Link to='/'>
+                            <Button className='!bg-white !text-orange-500 border-2 border-orange-500'>
+                                Return Back
+                            </Button>
+                        </Link>
+                    </div>     
+                    </div>
                 </div>
-            </div>
-            <div className='flex gap-4 mt-3 justify-center col-span-2'>
-                <Button onClick={handleCheckout}>Proceed To Checkout</Button>
-                <Link to='/'>
-                    <Button className='!bg-white !text-orange-500 border-2 border-orange-500'>
-                        Return Back
-                    </Button>
-                </Link>
-            </div>     
             </div>
         </div>
     );
