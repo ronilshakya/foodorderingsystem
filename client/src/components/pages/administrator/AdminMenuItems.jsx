@@ -6,9 +6,14 @@ export const sidebarItems = [
                 id: 1,
                 title: "All Users",
                 url: "",
-            },
+            }
+        ]
+    },
+    {
+        title: "Orders",
+        submenu: [
             {
-                id: 2,
+                id: 1,
                 title: "Order Status",
                 url: "order-status",
             }

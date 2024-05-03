@@ -1,30 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import AdminUpdateButton from '../../template/AdminUpdateButton';
 import AdminDeleteButton from '../../template/AdminDeleteButton';
-import { FaHistory } from "react-icons/fa";
 import useGetAllUsers from '../../../hooks/useGetAllUsers';
 import './admin.css'
 import useRemoveUser from '../../../hooks/useRemoveUser';
 import useUpdateUser from '../../../hooks/useUpdateUser';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
-import OrderModal from './admin-comp/OrderModal';
+
 
 const Administrator = () => {
   const {users, getAllUsers} = useGetAllUsers();
   const {removeUser} = useRemoveUser(getAllUsers);
   const {updateUser, updatedUser} = useUpdateUser();
-  const [openedModal, setOpenedModal] = useState(false);
-  const [modalUser, setModalUser] = useState({});
-
-  const openModal = (user) =>{
-    setOpenedModal(true);
-    setModalUser(user)
-  }
-  
-  const closeModal = () =>{
-    setOpenedModal(false);
-  }
+ 
 
   useEffect(()=>{
     if(updatedUser){
@@ -83,9 +72,9 @@ const Administrator = () => {
       <h1 className='text-2xl my-4'>All Users</h1>
       <h1 className='text-2xl my-4'>{users.length} Users</h1>
       <div className='flex flex-col'>
-      <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-          <div class="overflow-hidden">
+      <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+          <div className="overflow-hidden">
             <table className='min-w-full text-left text-sm font-semibold text-surface'>
               <thead className='bg-orange-500 text-white'>
                 <tr>
@@ -98,7 +87,8 @@ const Administrator = () => {
                 </tr>
               </thead>
               <tbody>
-                {users.map((user,i) => (
+                {
+                users.map((user,i) => (
                     <tr key={user._id}>
                       <td className="table-data whitespace-nowrap">{i+1}</td>
                       <td className="table-data whitespace-nowrap">{user.username}</td>
@@ -113,24 +103,17 @@ const Administrator = () => {
                         <div className='flex gap-2'>
                           <AdminUpdateButton  onClick={handleUpdate(user._id, user.username)} />
                           <AdminDeleteButton onClick={handleDelete(user._id, user.username)} />
-                          <button onClick={()=>openModal(user)} className='border bg-orange-600 py-1 px-2 rounded-lg text-white font-semibold flex items-center gap-1 justify-center'>
-                            <FaHistory />
-                          </button>
                         </div>
                       </td>
                     </tr>
-                ))}
+                ))
+            }
               </tbody>
             </table>
             </div>
           </div>
         </div>
       </div>
-      {openedModal ? (
-        <>
-          <OrderModal modalUser={modalUser} closeModal={closeModal} />
-        </>
-      ):(<></>)}
     </div>
   );
 };

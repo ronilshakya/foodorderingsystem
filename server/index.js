@@ -8,6 +8,7 @@ const authRouter = require('./routes/authRoute')
 const foodRouter = require('./routes/foodRoute')
 const contactRouter = require('./routes/contactRoute')
 const carouselRouter = require('./routes/carouselRoute')
+const orderRouter = require('./routes/orderRoute')
 
 // env
 const port = process.env.PORT;
@@ -27,6 +28,7 @@ app.use('/api/auth', authRouter)
 app.use('/food', foodRouter)
 app.use('/contact', contactRouter)
 app.use('/carousel', carouselRouter)
+app.use('/order', orderRouter)
 app.use(express.static('public'))
 
 app.listen(port,()=>{

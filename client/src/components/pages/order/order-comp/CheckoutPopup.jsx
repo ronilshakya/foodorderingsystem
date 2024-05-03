@@ -1,7 +1,8 @@
 import React, { useContext,useEffect,useState } from 'react';
 import { ShopContext } from '../../../../context/shop-context';
 import useGetAllFoodItems from '../../../../hooks/useGetAllFoodItems';
-import useAddOrderHistory from '../../../../hooks/useAddOrderHistory';
+// import useAddOrderHistory from '../../../../hooks/useAddOrderHistory';
+import useAddOrder from '../../../../hooks/useAddOrder';
 import Button from '../../../template/Button';
 import useAuth from '../../../../context/authContext';
 import { Link } from 'react-router-dom';
@@ -15,7 +16,8 @@ const CheckoutPopup = () => {
     const { cartItems, getTotalAmount } = useContext(ShopContext);
     const totalAmount = getTotalAmount();
     const [checkoutItems, setCheckoutItems] = useState({});
-    const {addOrderHistory} = useAddOrderHistory()
+    // const {addOrderHistory} = useAddOrderHistory()
+    const {addOrder} = useAddOrder();
 
     useEffect(() => {
         setCheckoutItems(cartItems);
@@ -27,7 +29,13 @@ const CheckoutPopup = () => {
             orderTime: dateObj.toLocaleString()
         };
         checkoutItems.orderTime = date.orderTime;
-        addOrderHistory(userData._id,{orderHistory: checkoutItems })
+        addOrder(
+            {
+                orderUser: userData.username,
+                orderFoodsHistory : checkoutItems,
+                orderTime: date.orderTime
+            })
+            console.log(userData)
     };
     
     useEffect(()=>{
