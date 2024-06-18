@@ -4,34 +4,11 @@ import { Link } from 'react-router-dom';
 
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
-import { MdOutlineDashboard,MdOutlineLocalOffer  } from "react-icons/md";
-import { IoRestaurantOutline } from "react-icons/io5";
 import { useLocation } from 'react-router-dom';
-import useGetAllFoodItems from '../../../hooks/useGetAllFoodItems';
 
 const Menu = (props) => {
     const location = useLocation();
     const [openItem,setOpenItem] = useState(null);
-    const {foods} = useGetAllFoodItems();
-
-    const sidebarItems = [
-        {
-            title:"Home / Menu",
-            icon:<MdOutlineDashboard/> ,
-            submenu:foods.map((item, id) => ({
-                id: id,
-                title: item.category,
-                url: ""
-            }))
-        },
-        {
-            title:"Info",icon:<IoRestaurantOutline/>,
-            submenu:[
-                {id:2 , title: "Contact",url:"contact"},
-            ]
-        },
-    ]
-
     const toggleSubmenu = (index) =>{
         if(openItem === index){
             setOpenItem(null);
@@ -64,7 +41,7 @@ const Menu = (props) => {
     <>
         <ul>
                     {
-                        sidebarItems.map(
+                        props.sidebarItems.map(
                             (item,index)=>(
                                 <li key={index} className={`list-none p-2 ${window.innerWidth<1024 ? 'opacity-0 ':'opacity-100'} cursor-pointer ${props.openedSidebar && 'opacity-100 transition duration-1000'}`}>
                                     <div onClick={()=>toggleSubmenu(index)} className={`px-2 py-3 flex items-center rounded-lg transition-all ${openItem===index?"theme-main-color text-white":""}`}>

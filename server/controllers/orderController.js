@@ -55,3 +55,29 @@ exports.getOrderByUsername = async (req,res,next) =>{
         res.status(400).json({message: error.message})
     }
 }
+
+exports.getOrderById = async (req,res,next) =>{
+    try {
+        const orderById = await Order.findById(req.params.id);
+        if(!orderById){
+            res.status(400).json({message: "Order not found"});
+        }
+        res.status(200).json(orderById);
+    } catch (error) {
+        res.status(400).json({message: error.message})
+    }
+}
+
+exports.deleteOrder = async (req,res,next) =>{
+    try {
+        const deletedOrder = await Order.findByIdAndDelete(req.params.id);
+        if(!deletedOrder){
+            res.status(400).json({message: "Order not found"});
+        }else{
+            res.status(200).json({message: "Order deleted successfully"});            
+        }
+    } catch (error) {
+        next(error);
+    }
+}
+

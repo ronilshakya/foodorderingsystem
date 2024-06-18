@@ -39,6 +39,8 @@ router.get('/getfoods',foodController.getFood);
 
 router.delete('/deletefood/:id',foodController.deleteFood)
 
-router.put('/updatefood/:id',foodController.updateFood)
+router.put('/updatefood/:id',foodController.updateFood);
+
+router.post('/updateinventory',foodController.updateOrderInventory);
 
 module.exports = router;

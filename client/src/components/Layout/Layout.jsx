@@ -3,7 +3,6 @@ import Header from "../Header/Header";
 import Sidebar from "../Sidebar/Sidebar";
 import { Outlet } from "react-router-dom";
 import Footer from "../Footer/Footer";
-import {sidebarItems} from '../Sidebar/SidebarData';
 export default function Dashboard() {
     const [openedSidebar,setOpenedSidebar] = useState(false);
     const triggerSidebar = () =>{
@@ -34,7 +33,6 @@ export default function Dashboard() {
             <Sidebar 
                 openedSidebar={openedSidebar} 
                 triggerSidebar={triggerSidebar}
-                sidebarItems ={sidebarItems}
             />
             <Outlet />
             <Footer />

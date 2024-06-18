@@ -8,6 +8,7 @@ import useAuth from '../../../../context/authContext';
 import { Link } from 'react-router-dom';
 import Input from '../../../template/Input'
 import { useNavigate } from 'react-router-dom';
+import useUpdateInventory from '../../../../hooks/useUpdateInventory';
 
 const CheckoutPopup = () => {
     const navigate = useNavigate();
@@ -16,33 +17,34 @@ const CheckoutPopup = () => {
     const { cartItems, getTotalAmount } = useContext(ShopContext);
     const totalAmount = getTotalAmount();
     const [checkoutItems, setCheckoutItems] = useState({});
-    // const {addOrderHistory} = useAddOrderHistory()
     const {addOrder} = useAddOrder();
+    const {updateInventory} = useUpdateInventory();
 
     useEffect(() => {
         setCheckoutItems(cartItems);
     }, [cartItems]);
 
-    const handleCheckout = () => {
+    const handleCheckout = async () => {
         const dateObj = new Date();
         const date = {
             orderTime: dateObj.toLocaleString()
         };
-        checkoutItems.orderTime = date.orderTime;
-        addOrder(
-            {
-                orderUser: userData.username,
-                orderFoodsHistory : checkoutItems,
-                orderTime: date.orderTime
-            })
-            console.log(userData)
-    };
     
-    useEffect(()=>{
-        if(Object.values(cartItems).every(value=> value ===0) ){
+        try {
+            const inventoryUpdated = await updateInventory({ orderItems: checkoutItems });
+
+        if (inventoryUpdated) {
+            await addOrder({
+                orderUser: userData.username,
+                orderFoodsHistory: checkoutItems,
+                orderTime: date.orderTime
+            });
+            }
             navigate('/');
+        } catch (error) {
+            console.error('Error during checkout:', error);
         }
-    },[])
+    };
     return (
         <div className='page-template'>
             <div className='md:p-8'>

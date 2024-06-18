@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
 
 const foodSchema = new Schema({
@@ -17,9 +16,17 @@ const foodSchema = new Schema({
         required: true
     },
     image: {
-        type: String
+        type: String,
+        required: true
+    },
+    inventory:{
+        type: Number,
+        required: true
+    },
+    description:{
+        type: String,
+        required: true
     }
-
 });
 
 const Food = mongoose.model('Food', foodSchema);

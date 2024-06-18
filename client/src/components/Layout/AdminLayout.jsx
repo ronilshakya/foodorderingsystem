@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import Sidebar from '../Sidebar/Sidebar'
+import AdminSidebar from '../Sidebar/AdminSidebar'
 import AdminHeader from "../Header/AdminHeader";
 import { sidebarItems } from '../pages/administrator/AdminMenuItems'
 import { Outlet } from 'react-router-dom'
@@ -30,7 +30,7 @@ const AdminLayout = () => {
                 openedSidebar={openedSidebar} 
                 triggerSidebar={triggerSidebar}
             />
-        <Sidebar 
+        <AdminSidebar 
                 openedSidebar={openedSidebar} 
                 triggerSidebar={triggerSidebar}
                 sidebarItems ={sidebarItems}

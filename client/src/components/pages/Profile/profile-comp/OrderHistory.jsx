@@ -23,7 +23,7 @@ const OrderHistory = (props) => {
         <div className='flex justify-evenly my-2'>
 
           <h1 className='text-md py-2 px-3 rounded-lg bg-orange-500 text-white font-semibold'>
-            {order.orderStatus}
+            Status: {order.orderStatus}
           </h1>
 
           <h1 className='text-lg text-orange-500 font-semibold'>

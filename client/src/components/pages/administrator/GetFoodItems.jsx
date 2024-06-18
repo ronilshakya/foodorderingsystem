@@ -34,9 +34,9 @@ const GetFoodItems = () => {
     })
   }
 
-  const handleUpdate = (id) => e =>{
+  const handleUpdate = (id) => (e) => {
     Swal.fire({
-      title: `Update Food Item?`,
+      title: 'Update Food Item?',
       html: `
         <input
           placeholder="Set name"
@@ -44,41 +44,48 @@ const GetFoodItems = () => {
           class="swal2-input"
           id="swal2-input-name">
           
-          <input
+        <input
           placeholder="Set price"
           type="number"
           class="swal2-input"
           id="swal2-input-price">
           
-          <input
+        <input
           placeholder="Set category"
           type="text"
           class="swal2-input"
-          id="swal2-input-category">`,
-
+          id="swal2-input-category">
+  
+        <input
+          placeholder="Set inventory"
+          type="number"
+          class="swal2-input"
+          id="swal2-input-inventory">`,
       showCancelButton: true,
-      confirmButtonText: "Update",
-      cancelButtonText: "Cancel",
-      confirmButtonColor: "#F97316",
-
+      confirmButtonText: 'Update',
+      cancelButtonText: 'Cancel',
+      confirmButtonColor: '#F97316',
       preConfirm: () => {
         const inputName = Swal.getPopup().querySelector('#swal2-input-name').value;
         const inputPrice = Swal.getPopup().querySelector('#swal2-input-price').value;
         const inputCategory = Swal.getPopup().querySelector('#swal2-input-category').value;
-        return {inputName,inputPrice,inputCategory};
+        const inputInventory = Swal.getPopup().querySelector('#swal2-input-inventory').value;
+        return { inputName, inputPrice, inputCategory, inputInventory };
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        const {inputName,inputPrice,inputCategory} = result.value;
-        const newFoodItem = {
-          name: inputName,
-          price: inputPrice,
-          category: inputCategory
-        };
+        const { inputName, inputPrice, inputCategory, inputInventory } = result.value;
+        const newFoodItem = {};
+  
+        if (inputName) newFoodItem.name = inputName;
+        if (inputPrice) newFoodItem.price = parseFloat(inputPrice);
+        if (inputCategory) newFoodItem.category = inputCategory;
+        if (inputInventory) newFoodItem.inventory = parseInt(inputInventory, 10);
+  
         updateFood(id, newFoodItem);
       }
     });
-  }
+  };
 
   return (
     <div className='page-template'>
@@ -96,6 +103,7 @@ const GetFoodItems = () => {
                     <th scope="col" className="table-data">Food price</th>
                     <th scope="col" className="table-data">Food category</th>
                     <th scope="col" className="table-data">Food image</th>
+                    <th scope="col" className="table-data">Food inventory</th>
                     <th scope="col" className="table-data">Actions</th>
                   </tr>
                 </thead>
@@ -108,6 +116,7 @@ const GetFoodItems = () => {
                         <td className="table-data whitespace-nowrap">{item.price}</td>
                         <td className="table-data whitespace-nowrap">{item.category}</td>
                         <td className="table-data whitespace-nowrap"><img src={`${import.meta.env.VITE_BASE_URL}/images/${item.image}`} className='w-10' alt="img" /></td>
+                        <td className="table-data whitespace-nowrap">{item.inventory}</td>
                         <td className="table-data whitespace-nowrap">
                           <div className='flex gap-2'>
                             <AdminUpdateButton  onClick={handleUpdate(item._id)} />

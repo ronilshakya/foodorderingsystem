@@ -8,7 +8,7 @@ exports.signup = async (req, res, next) => {
         const user = await User.findOne({email : req.body.email});
 
         if(user){
-            res.status(400).json({message: "User already exists"});
+            return res.status(400).json({message: "User already exists"});
         }
 
         let salt = await bcrypt.genSalt(10)
@@ -38,7 +38,7 @@ exports.signup = async (req, res, next) => {
         });
 
     } catch (error) {
-        next(error)
+        next(error.message)
     }
 };
 

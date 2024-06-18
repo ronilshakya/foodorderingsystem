@@ -20,11 +20,11 @@ export const sidebarItems = [
         ]
     },
     {
-        title: "Food Items",
+        title: "Foods / Inventory",
         submenu:[
             {
                 id: 1,
-                title: "Add Food Items",
+                title: "Add Food Item",
                 url: "add-food"
             },
             {
