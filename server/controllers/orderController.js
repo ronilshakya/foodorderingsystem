@@ -2,12 +2,13 @@ const Order = require('../models/orderModel');
 
 exports.addOrder = async (req,res,next) =>{
     try{
-        const {orderUser, orderStatus, orderFoodsHistory, orderTime } = req.body;
+        const {orderUser, orderStatus, orderFoodsHistory, orderTime, orderAddress } = req.body;
         const orderToAdd = await Order.create({
             orderUser: orderUser,
             orderStatus: orderStatus,
             orderFoodsHistory: orderFoodsHistory,
-            orderTime: orderTime
+            orderTime: orderTime,
+            orderAddress: orderAddress
         })
         if(!orderToAdd){
             res.status(400).json({message: "Failed to create order"});

@@ -16,6 +16,8 @@ import ContactUsInquiries from "./components/pages/administrator/ContactUsInquir
 import CarouselAdministrator from "./components/pages/administrator/CarouselAdministrator";
 import PageNotFound from "./components/pages/404/PageNotFound";
 import OrderStatus from "./components/pages/administrator/OrderStatus";
+import MyOrders from "./components/pages/notification/MyOrders";
+import GenerateReport from "./components/pages/administrator/GenerateReport";
 
 function App() {
   return (
@@ -34,6 +36,7 @@ function App() {
                   <Route path="get-contact-us-inquiries" element={<ContactUsInquiries />}/>
                   <Route path="carousel-administrator" element={<CarouselAdministrator />}/>
                   <Route path="order-status" element={<OrderStatus />}/>
+                  <Route path="report" element={<GenerateReport />}/>
                 </Route>
 
                 <Route path="/" element={<Layout />}>
@@ -41,6 +44,7 @@ function App() {
                   <Route path="/checkout" element={<CheckoutPopup />} />
                   <Route path="contact" element={<Contact />}/>
                   <Route path="profile" element={<Profile />}/>
+                  <Route path="my-orders" element={<MyOrders/>}/>
                 </Route>
                 <Route path="*" element={<PageNotFound />}/>
               </Routes>

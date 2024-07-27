@@ -17,6 +17,10 @@ const orderSchema = new Schema({
     orderTime:{
         type: String,
         required: true
+    },
+    orderAddress:{
+        type: String,
+        required: true
     }
 })
 

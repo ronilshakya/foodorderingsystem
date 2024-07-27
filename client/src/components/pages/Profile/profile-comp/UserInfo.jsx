@@ -7,7 +7,7 @@ import Button from '../../../template/Button';
 import Swal from 'sweetalert2';
 
 const UserInfo = (props) => {
-    const { username, email, _id } = props.userData;
+    const { username, phone, _id } = props.userData;
     const {addProfilePic} = useAddProfilePic();
     const [selectedImage, setSelectedImage] = useState(null);
     const {userImage,getProfilePic} = useGetProfilePic();
@@ -71,12 +71,12 @@ const UserInfo = (props) => {
             </div>
             <div className='text-center'>
                 <div className='m-6'>
-                    <h1 className='text-neutral-500'>Username</h1>
+                    <h1 className='text-neutral-500 font-semibold'>Username</h1>
                     <h1 className='text-orange-500 text-3xl'>{username}</h1>
                 </div>
                 <div className='m-6'>
-                    <h1 className='text-neutral-500'>Email</h1>
-                    <h1 className='text-orange-500 text-3xl'>{email}</h1>
+                    <h1 className='text-neutral-500 font-semibold'>Phone No.</h1>
+                    <h1 className='text-orange-500 text-3xl'>{phone}</h1>
                 </div>
             </div>
         </div>

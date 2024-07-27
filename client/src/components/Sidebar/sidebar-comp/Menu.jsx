@@ -6,6 +6,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
 import { MdOutlineDashboard,MdOutlineLocalOffer  } from "react-icons/md";
 import { IoRestaurantOutline } from "react-icons/io5";
+import { IoMdNotificationsOutline } from "react-icons/io";
 import { useLocation } from 'react-router-dom';
 import useGetAllFoodItems from '../../../hooks/useGetAllFoodItems';
 
@@ -13,16 +14,24 @@ const Menu = (props) => {
     const location = useLocation();
     const [openItem,setOpenItem] = useState(null);
     const {foods} = useGetAllFoodItems();
+    const uniqueCategories = [...new Set(foods.map(item => item.category))];
 
     const sidebarItems = [
         {
             title:"Home / Menu",
             icon:<MdOutlineDashboard/> ,
-            submenu:foods.map((item, id) => ({
+            submenu: uniqueCategories.map((category, id) => ({
                 id: id,
-                title: item.category,
+                title: category,
                 url: ""
             }))
+        },
+        {
+            title: "Notifications",
+            icon:<IoMdNotificationsOutline /> ,
+            submenu:[
+                {id:1, title: "My Orders", url: "my-orders"}
+            ]
         },
         {
             title:"Info",icon:<IoRestaurantOutline/>,

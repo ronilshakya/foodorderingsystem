@@ -53,5 +53,15 @@ export const sidebarItems = [
                 url: "carousel-administrator"
             }
         ]
+    },
+    {
+        title:"Reports",
+        submenu:[
+            {
+                id:1,
+                title: "Monthly Sales Report",
+                url: "report"
+            }
+        ]
     }
 ];

@@ -80,7 +80,7 @@ const Administrator = () => {
                 <tr>
                   <th scope="col" className="table-data">SN.</th>
                   <th scope="col" className="table-data">Username</th>
-                  <th scope="col" className="table-data">Email</th>
+                  <th scope="col" className="table-data">Phone Number</th>
                   <th scope="col" className="table-data">Registration Date</th>
                   <th scope="col" className="table-data">User Image</th>
                   <th scope="col" className="table-data">Action</th>
@@ -92,7 +92,7 @@ const Administrator = () => {
                     <tr key={user._id}>
                       <td className="table-data whitespace-nowrap">{i+1}</td>
                       <td className="table-data whitespace-nowrap">{user.username}</td>
-                      <td className="table-data whitespace-nowrap">{user.email}</td>
+                      <td className="table-data whitespace-nowrap">{user.phone}</td>
                       <td className="table-data whitespace-nowrap">{user.createdAt}</td>
                       <td className="table-data whitespace-nowrap">
                         <div className='ring-1 ring-orange-500 rounded-full w-12 h-12 overflow-hidden'>

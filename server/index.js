@@ -18,7 +18,9 @@ app.use(cors())
 app.use(express.json())
 
 // mongodb connection
-mongoose.connect(process.env.DATABASE)
+mongoose.connect(process.env.DATABASE, {
+    serverSelectionTimeoutMS: 30000 
+  })
 const db = mongoose.connection;
 db.on('error',(error)=>{console.error(error)})
 db.once('open',() => {console.log("Database connection success")})

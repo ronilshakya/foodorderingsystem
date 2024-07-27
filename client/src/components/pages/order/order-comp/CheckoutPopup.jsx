@@ -1,7 +1,6 @@
 import React, { useContext,useEffect,useState } from 'react';
 import { ShopContext } from '../../../../context/shop-context';
 import useGetAllFoodItems from '../../../../hooks/useGetAllFoodItems';
-// import useAddOrderHistory from '../../../../hooks/useAddOrderHistory';
 import useAddOrder from '../../../../hooks/useAddOrder';
 import Button from '../../../template/Button';
 import useAuth from '../../../../context/authContext';
@@ -9,6 +8,10 @@ import { Link } from 'react-router-dom';
 import Input from '../../../template/Input'
 import { useNavigate } from 'react-router-dom';
 import useUpdateInventory from '../../../../hooks/useUpdateInventory';
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import { RxCrossCircled } from "react-icons/rx";
+import loadingSpinner from '../../../../assets/Spinner-1s-200px.svg'
 
 const CheckoutPopup = () => {
     const navigate = useNavigate();
@@ -19,10 +22,9 @@ const CheckoutPopup = () => {
     const [checkoutItems, setCheckoutItems] = useState({});
     const {addOrder} = useAddOrder();
     const {updateInventory} = useUpdateInventory();
-
-    useEffect(() => {
-        setCheckoutItems(cartItems);
-    }, [cartItems]);
+    const [address, setAddress] = useState();
+    const [loading, setLoading] = useState(false)
+    
 
     const handleCheckout = async () => {
         const dateObj = new Date();
@@ -33,24 +35,70 @@ const CheckoutPopup = () => {
         try {
             const inventoryUpdated = await updateInventory({ orderItems: checkoutItems });
 
-        if (inventoryUpdated) {
-            await addOrder({
-                orderUser: userData.username,
-                orderFoodsHistory: checkoutItems,
-                orderTime: date.orderTime
-            });
+            if(address === ''){
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: `Please enter address`,
+                    showConfirmButton: true
+                })
+            }else{
+                if (inventoryUpdated) {
+                    await addOrder({
+                        orderUser: userData.username,
+                        orderFoodsHistory: checkoutItems,
+                        orderTime: date.orderTime,
+                        orderAddress: address
+                    });
+                    }
+                    navigate('/');
             }
-            navigate('/');
         } catch (error) {
-            console.error('Error during checkout:', error);
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: `Please enter address`,
+                showConfirmButton: true
+            })
         }
     };
+
+    useEffect(() => {
+        setCheckoutItems(cartItems);
+    }, [cartItems]);
+
+    const findLocation = () =>{
+        setLoading(true);
+        if('geolocation' in navigator){
+            navigator.geolocation.getCurrentPosition(async (position)=>{
+                try {
+                    const {latitude, longitude} = position.coords;
+                    const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=7a9dcfceaee1a2e400fc1330844f0274`);
+                    if(response){
+                        setAddress(`${response.data.name}, ${response.data.sys.country}`);
+                        setLoading(false)
+                    }
+                } catch (error) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: `Something went wrong`,
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                }
+            })
+        }else{
+            console.log("Geolocation isn't available in your browser!");
+        }
+    }
+
     return (
         <div className='page-template'>
             <div className='md:p-8'>
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
                 <div className='flex flex-col justify-center p-5'>
-                    <h1 className='text-xl'>Your Order</h1>
+                    <h1 className='text-xl font-semibold'>Your Order</h1>
                     <div className='flex flex-col'>
                             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                                 <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
@@ -101,12 +149,30 @@ const CheckoutPopup = () => {
                 </div>
                 <div className='p-5 flex flex-col justify-evenly'>
                     <div className='flex flex-col my-4 gap-4'>
-                        <h1 className='text-xl'>Billing Address</h1>
-                        <Input type='number' placeholder='Enter Phone Number'/>
-                        <Input type='text' placeholder='Enter Address'/>
+                        <h1 className='text-xl font-semibold'>Billing Address</h1>
+                        <Input type='text' placeholder='Enter Address' onChange={(e)=>setAddress(e.target.value)}/>
+                        <h1 className='text-center'>Or</h1>
+                        <button
+                            className='border p-2 rounded-md text-neutral-600 focus:border-orange-400 focus:outline-none'
+                            onClick={()=>findLocation()}
+                        >
+                            Click to identify current address
+                        </button>
+                        {loading ? (
+                            <img src={loadingSpinner} className='w-12' alt='Loading...' />
+                        ) : address ? (
+                            <div className='border border-orange-500 p-3 rounded-md flex justify-between'>
+                                <p>
+                                    <b>Location:</b> {address}
+                                </p>
+                                <button onClick={() => setAddress(null)} aria-label='Clear address'>
+                                    <RxCrossCircled fontSize='1.5em' color='red' />
+                                </button>
+                            </div>
+                        ) : null}
                     </div>
                     <div className='flex flex-col my-4 gap-4'>
-                        <h1 className='text-xl'>Payment Method</h1>
+                        <h1 className='text-xl font-semibold'>Payment Method</h1>
                         <select name="" id="" className='border border-neutral-400 p-2 rounded-md text-neutral-600 focus:border-orange-400 focus:outline-none'>
                             <option value="">Cash on delivery</option>
                             <option value="">Esewa</option>

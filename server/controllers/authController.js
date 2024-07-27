@@ -5,7 +5,7 @@ const User = require('../models/userModel');
 // Register User
 exports.signup = async (req, res, next) => {
     try {
-        const user = await User.findOne({email : req.body.email});
+        const user = await User.findOne({username : req.body.username});
 
         if(user){
             return res.status(400).json({message: "User already exists"});
@@ -32,7 +32,7 @@ exports.signup = async (req, res, next) => {
             user:{
                 _id: newUser._id,
                 username: newUser.username,
-                email: newUser.email,
+                phone: newUser.phone,
                 orderHistory: newUser.orderHistory
             }
         });
@@ -45,9 +45,9 @@ exports.signup = async (req, res, next) => {
 // Sign in User
 exports.signin = async (req, res, next) => {
     try {
-        const {email, password} = req.body;
+        const {username, password} = req.body;
 
-        const user = await User.findOne({email});
+        const user = await User.findOne({username});
 
         if(!user){
             res.status(404).json({messsage:"User not found"})
@@ -56,7 +56,7 @@ exports.signin = async (req, res, next) => {
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
         if(!isPasswordValid){
-            res.status(401).json({message: "Invalid Email or Password"});
+            res.status(401).json({message: "Invalid username or Password"});
         }
 
         const token = jwt.sign(
@@ -72,7 +72,7 @@ exports.signin = async (req, res, next) => {
             user:{
                 _id: user._id,
                 username: user.username,
-                email: user.email,
+                phone: user.phone,
                 orderHistory: user.orderHistory
             }
         })

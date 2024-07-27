@@ -33,7 +33,6 @@ const useAddFoodItems = () => {
                     showConfirmButton: false,
                     timer: 1000
                 });
-                // Assuming successful submission, clear the form or do any other necessary action
                 setNewFood({
                     name: '',
                     price: '',

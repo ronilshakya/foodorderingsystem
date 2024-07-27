@@ -31,7 +31,7 @@ const ProfileHeader = () => {
     const menuList = menu.map(
         (item, index) =>(
             <li key={index}>
-                <Link to={item.url} onClick={()=>{item.onClick(); triggerNavOpen()}} className='px-4 py-2 w-36 flex gap-2  hover:bg-neutral-200'>
+                <Link to={item.url} onClick={()=>{item.onClick(); triggerNavOpen()}} className='px-4 py-2 w-40 flex gap-2  hover:bg-neutral-200'>
                     <img src={item.icon} alt="icon" className='w-5'/>
                     <p className='text-neutral-600 text-sm font-semibold'>{item.title}</p>
                 </Link>
@@ -48,7 +48,7 @@ const ProfileHeader = () => {
     },[getProfilePic,userData])
   return (
     <div className={``}>
-                <div className={`flex items-center gap-2 px-4 py-2 w-36  cursor-pointer ${navOpen ? "bg-white rounded-t-md transition duration-300": "theme-light-color rounded-md transition duration-300" }`} onClick={triggerNavOpen}>
+                <div className={`flex items-center justify-between gap-2 px-4 py-2 w-40 cursor-pointer ${navOpen ? "bg-white rounded-t-md transition duration-300": "theme-light-color rounded-md transition duration-300" }`} onClick={triggerNavOpen}>
                     <div className="rounded-full ring-2 ring-white overflow-hidden w-9 h-9">
                     {isLoading?(
                         <img src={LoadingSpinner} alt="spinner" className='w-20' />

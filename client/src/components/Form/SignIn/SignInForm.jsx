@@ -18,21 +18,21 @@ const mediaLogin = [
 const SignInForm = () => {
     const { loginUser } = useLogin();
 
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [formError, setFormError] = useState('');
 
     const handleSignIn = async (event) => {
         event.preventDefault();
         
-        if (!email.trim() || !password.trim()) {
-            setFormError("Email and password are required");
+        if (!username.trim() || !password.trim()) {
+            setFormError("Username and password are required");
             return;
         }
 
         try {
             const userData = {
-                email: email,
+                username: username,
                 password: password
             };
 
@@ -44,8 +44,8 @@ const SignInForm = () => {
         }
     };
 
-    const handleEmailChange = (event) => {
-        setEmail(event.target.value);
+    const handleUsernameChange = (event) => {
+        setUsername(event.target.value);
     };
 
     const handlePasswordChange = (event) => {
@@ -76,12 +76,12 @@ const SignInForm = () => {
                     </div>
                     <form className="flex flex-col gap-4 w-96" onSubmit={handleSignIn}>
                         <Input
-                            label="Email Address"
+                            label="Username"
                             type="text"
                             placeholder="example@gmail.com"
-                            id="email"
-                            value={email}
-                            onChange={handleEmailChange}
+                            id="username"
+                            value={username}
+                            onChange={handleUsernameChange}
                         />
                         <Input
                             label="Password"

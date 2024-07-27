@@ -14,8 +14,8 @@ const SignUpForm = () => {
     const [username, setUsername] = useState('');
     const [usernameError, setUsernameError] = useState('');
     
-    const [email, setEmail] = useState('');
-    const [emailError, setEmailError] = useState('');
+    const [phone, setPhone] = useState('');
+    const [phoneError, setPhoneError] = useState('');
 
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
@@ -32,13 +32,13 @@ const SignUpForm = () => {
             setUsernameError('');
         }
     };
-    const handleEmailChange = (event) =>{
+    const handlePhoneChange = (event) =>{
         const value = event.target.value;
-        setEmail(value);
+        setPhone(value);
         if(!value.trim()){
-            setEmailError("Email is required")
+            setPhoneError("Phone number is required")
         }else{
-            setEmailError("");
+            setPhoneError("");
         }
     }
     const handlePasswordChange = (event) =>{
@@ -65,13 +65,17 @@ const SignUpForm = () => {
             setUsernameError('Username is required.');
             return false;
         }
-
-        if (!email.trim()) {
-            setEmailError('Email is required.');
+        if (username.length < 5) {
+            setUsernameError('Username must be atleast 5 digits.');
             return false;
         }
-        if(!email.match(/^[a-zA-Z0-9._]+@[a-zA-Z]+\.[a-zA-Z]{2,}$/)){
-            setEmailError('Invalid Email Address');
+
+        if (!phone.trim()) {
+            setPhoneError('Phone number is required.');
+            return false;
+        }
+        if(!phone.match(/^98\d{8}$/)){
+            setPhoneError('Invalid Phone Number');
             return false;
         }
 
@@ -100,7 +104,7 @@ const SignUpForm = () => {
         if (validateForm()) {
             const userData = {
                 username: username,
-                email: email,
+                phone: phone,
                 password: password
             };
         await registerUser(userData);
@@ -133,12 +137,12 @@ const SignUpForm = () => {
                         onChange={handleUsernameChange}
                     />
                     <Input
-                        label="Email Address"
+                        label="Phone Number"
                         type="text"
-                        placeholder="Enter email"
-                        id="email"
-                        spanError={emailError}
-                        onChange={handleEmailChange}
+                        placeholder="Enter phone number"
+                        id="phone"
+                        spanError={phoneError}
+                        onChange={handlePhoneChange}
                     />
                     <Input
                         label="Password"

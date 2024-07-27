@@ -6,6 +6,7 @@ Fully functional restaurant food ordering system
 Pending:
   -> payment gateway
   -> geolocation
+  -> order notifications
 
 food items:
   -> Momo --- Buff Momo, Chicken Momo, Veg Momo
