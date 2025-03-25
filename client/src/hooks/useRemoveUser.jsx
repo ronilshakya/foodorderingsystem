@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 const useRemoveUser = (getAllUsers) => {
     const removeUser = async(id) =>{
         try{
-          const response = await axios.delete(`http://localhost:8000/api/auth/deleteuser/${id}`);
+          const response = await axios.delete(`https://foodorderingsystem-pjzg.onrender.com/api/auth/deleteuser/${id}`);
           if(response.status === 200){
             getAllUsers();
             Swal.fire({

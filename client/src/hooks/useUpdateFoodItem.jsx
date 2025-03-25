@@ -7,7 +7,7 @@ const useUpdateFoodItem = () => {
 
     const updateFood = async(id, values) =>{
         try{
-            const response = await axios.put(`http://localhost:8000/food/updatefood/${id}`,values);
+            const response = await axios.put(`https://foodorderingsystem-pjzg.onrender.com/food/updatefood/${id}`,values);
             if(response.status === 200){
                 setUpdatedFood(response.data)
                 Swal.fire({

@@ -6,7 +6,7 @@ const useGetAllUsers = () => {
 
   const getAllUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/api/auth/getallusers');
+      const response = await axios.get('https://foodorderingsystem-pjzg.onrender.com/api/auth/getallusers');
       if (response.status === 200) {
         setUsers(response.data);
       }

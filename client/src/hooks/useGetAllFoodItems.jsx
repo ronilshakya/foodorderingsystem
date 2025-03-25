@@ -5,7 +5,7 @@ const useGetAllFoodItems = () => {
     const [foods, setFoods] = useState([]);
     const getAllFoods = async () =>{
         try {
-          const response = await axios.get('http://localhost:8000/food/getfoods');
+          const response = await axios.get('https://foodorderingsystem-pjzg.onrender.com/food/getfoods');
           if(response.status === 200){
             setFoods(response.data)
           }

@@ -5,7 +5,7 @@ const useGetContact = () => {
     const [contactUsInquiries, setContactUsInquiries] = useState([])
     const getContacts = async () =>{
         try {
-            const response = await axios.get('http://localhost:8000/contact/getallcontacts');
+            const response = await axios.get('https://foodorderingsystem-pjzg.onrender.com/contact/getallcontacts');
             if(response.status === 200){
                 setContactUsInquiries(response.data)
             }else{

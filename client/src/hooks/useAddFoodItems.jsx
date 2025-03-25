@@ -24,7 +24,7 @@ const useAddFoodItems = () => {
         formData.append('description', newFood.description.trim());
 
 
-        axios.post('http://localhost:8000/food/add', formData)
+        axios.post('https://foodorderingsystem-pjzg.onrender.com/food/add', formData)
             .then(res => {
                 Swal.fire({
                     position: "top-end",

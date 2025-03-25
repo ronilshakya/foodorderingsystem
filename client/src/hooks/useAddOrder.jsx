@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 
 const useAddOrder = () => {
     const addOrder = async (obj) =>{
-        const response = await axios.post('http://localhost:8000/order/addorder',obj);
+        const response = await axios.post('https://foodorderingsystem-pjzg.onrender.com/order/addorder',obj);
         if(response.status === 400 || response.status === 500){
           console.log("Failed to add order")
         }else{

@@ -5,7 +5,7 @@ import Swal from 'sweetalert2'
 const useUpdateOrder = () => {
     const updateOrder = async (orderId,obj) =>{
         try {
-            const response = await axios.put(`http://localhost:8000/order/updateorder/${orderId}`,obj);
+            const response = await axios.put(`https://foodorderingsystem-pjzg.onrender.com/order/updateorder/${orderId}`,obj);
             if(response.status === 400){
                 Swal.fire({
                     position: "top-end",

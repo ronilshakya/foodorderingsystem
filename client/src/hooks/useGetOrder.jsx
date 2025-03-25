@@ -6,7 +6,7 @@ const useGetOrder = () => {
     const [allOrders, setAllOrders] = useState();
     const getAllOrders = async () =>{
         try {
-            const response = await axios.get('http://localhost:8000/order/getorder');
+            const response = await axios.get('https://foodorderingsystem-pjzg.onrender.com/order/getorder');
             if(response.status === 200){
                 setAllOrders(response.data);
             }else{
@@ -20,7 +20,7 @@ const useGetOrder = () => {
     const [orderByUsername, setOrderByUsername] = useState();
     const getOrderByUsername = async (username) =>{
         try{
-            const response = await axios.get(`http://localhost:8000/order/getorderbyusername/${username}`);
+            const response = await axios.get(`https://foodorderingsystem-pjzg.onrender.com/order/getorderbyusername/${username}`);
             if(response.status === 200){
                 setOrderByUsername(response.data)
             }else{

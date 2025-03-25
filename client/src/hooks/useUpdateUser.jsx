@@ -6,7 +6,7 @@ const useUpdateUser = () => {
     const [updatedUser, setUpdatedUser] = useState('');
     const updateUser = async (id, username) =>{
         try{
-            const response = await axios.put(`http://localhost:8000/api/auth/updateuser/${id}`,username);
+            const response = await axios.put(`https://foodorderingsystem-pjzg.onrender.com/api/auth/updateuser/${id}`,username);
             if(response.data){
                 setUpdatedUser(response.data)
                 Swal.fire({

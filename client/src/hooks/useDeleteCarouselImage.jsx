@@ -5,7 +5,7 @@ import Swal from 'sweetalert2'
 const useDeleteCarouselImage = () => {
     const deleteCarouselImage = async (id) =>{
         try {
-            const response = await axios.delete(`http://localhost:8000/carousel/deletecarouselimage/${id}`)
+            const response = await axios.delete(`https://foodorderingsystem-pjzg.onrender.com/carousel/deletecarouselimage/${id}`)
             if(response.status === 200){
                 Swal.fire({
                     position: "top-end",

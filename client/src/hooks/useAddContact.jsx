@@ -5,7 +5,7 @@ import Swal from 'sweetalert2'
 const useAddContact = () => {
     const addContact = async (obj) => {
         try {
-            const response = await axios.post('http://localhost:8000/contact/addcontact', obj);
+            const response = await axios.post('https://foodorderingsystem-pjzg.onrender.com/contact/addcontact', obj);
             if (response.status === 200) {
                 Swal.fire({
                     position: "top-end",

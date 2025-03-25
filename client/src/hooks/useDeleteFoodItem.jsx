@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 
 const useDeleteFoodItem = () => {
     const deleteFoodItem = async(id) =>{
-        const response = await axios.delete(`http://localhost:8000/food/deletefood/${id}`);
+        const response = await axios.delete(`https://foodorderingsystem-pjzg.onrender.com/food/deletefood/${id}`);
         if(response.status === 200){
             Swal.fire({
                 position: "top-end",

@@ -7,7 +7,7 @@ const useAddProfilePic = () => {
             const formData = new FormData();
             formData.append('image', image);
 
-            const response = await axios.put(`http://localhost:8000/api/auth/adduserimage/${id}`, formData);
+            const response = await axios.put(`https://foodorderingsystem-pjzg.onrender.com/api/auth/adduserimage/${id}`, formData);
 
             if (response.status === 200) {
                 console.log('Profile picture added successfully');

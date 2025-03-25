@@ -15,7 +15,7 @@ const useSignUp = () => {
             setError(null);
             setLoading(true);
 
-            const response = await axios.post('http://localhost:8000/api/auth/signup', values);
+            const response = await axios.post('https://foodorderingsystem-pjzg.onrender.com/api/auth/signup', values);
 
             if (response.status === 201) {
                 console.log(response.data.message);

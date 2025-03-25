@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 const useUpdateInventory = () => {
     const updateInventory = async (orderObj) => {
         try {
-            const response = await axios.post('http://localhost:8000/food/updateinventory', orderObj);
+            const response = await axios.post('https://foodorderingsystem-pjzg.onrender.com/food/updateinventory', orderObj);
 
             if (response.status >= 400 && response.status < 600) {
                 Swal.fire({

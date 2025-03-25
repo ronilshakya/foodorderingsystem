@@ -5,7 +5,7 @@ const useGetProfilePic = () => {
     const [userImage, setUserImage] = useState('')
     const getProfilePic = async (id) =>{
         try {
-            const response = await axios.get(`http://localhost:8000/api/auth/getuserimage/${id}`);
+            const response = await axios.get(`https://foodorderingsystem-pjzg.onrender.com/api/auth/getuserimage/${id}`);
             if(response.status === 400){
                 console.log(response.data)
             }else{

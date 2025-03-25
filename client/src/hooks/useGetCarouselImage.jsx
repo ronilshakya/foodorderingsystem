@@ -7,7 +7,7 @@ const useGetCarouselImage = () => {
 
     const getCarouselImagefunction = async () =>{
         try {
-            const response = await axios.get('http://localhost:8000/carousel/getcarouselimage');
+            const response = await axios.get('https://foodorderingsystem-pjzg.onrender.com/carousel/getcarouselimage');
             if(response.status === 201){
                 setGetCarouselImage(response.data)
                 setLoading(false)

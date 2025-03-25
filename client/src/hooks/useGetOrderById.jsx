@@ -5,7 +5,7 @@ const useGetOrderById = () => {
     const [orderById, setOrderById] = useState();
     const getOrderById = async (id) =>{
         try {
-            const response = await axios.get(`http://localhost:8000/order/getorderbyid/${id}`);
+            const response = await axios.get(`https://foodorderingsystem-pjzg.onrender.com/order/getorderbyid/${id}`);
             if(response.status === 200){
                 setOrderById(response.data);
             }else{
