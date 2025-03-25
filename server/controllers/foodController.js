@@ -55,6 +55,7 @@ exports.updateFood = async(req,res,next) =>{
             price: req.body.price,
             category: req.body.category,
             inventory: req.body.inventory,
+            description: req.body.description
         });
         if(!updatedFood){
             res.status(404).json({message: "Update failed"});

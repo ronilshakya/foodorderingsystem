@@ -1,22 +1,40 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useRef } from 'react';
 import useGetOrder from '../../../hooks/useGetOrder';
 import useAuth from '../../../context/authContext';
 import Button from '../../template/Button';
 import { MdOutlineRestaurant } from "react-icons/md";
 import { MdExpandMore } from "react-icons/md";
 import useGetAllFoodItems from '../../../hooks/useGetAllFoodItems';
+import Swal from 'sweetalert2';
 
 const MyOrders = () => {
     const { orderByUsername, getOrderByUsername } = useGetOrder();
     const { userData } = useAuth();
     const { foods } = useGetAllFoodItems();
     const [openDetails, setOpenDetails] = useState({});
+    const previousOrderStatuses = useRef({});
 
     useEffect(() => {
         if (userData !== null) {
             getOrderByUsername(userData.username);
         }
     }, [userData, getOrderByUsername]);
+
+    useEffect(() => {
+        if (orderByUsername) {
+            orderByUsername.forEach(order => {
+                if (previousOrderStatuses.current[order._id] && previousOrderStatuses.current[order._id] !== order.orderStatus) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `Your recent order is ${order.orderStatus}`,
+                        showConfirmButton: true
+                    });
+                }
+                previousOrderStatuses.current[order._id] = order.orderStatus;
+            });
+        }
+    }, [orderByUsername]);
 
     const formatRelativeDate = (dateString) => {
         const inputDate = new Date(dateString);
@@ -126,6 +144,7 @@ const MyOrders = () => {
                                                                                         <td className='border-none'><h1>{order.orderAddress}</h1></td>
                                                                                         <td className='border-none'><h1>Rs. {subTotal}</h1></td>
                                                                                     </tr>
+                                                                                    
                                                                                 </tbody>
                                                                             );
                                                                         }

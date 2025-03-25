@@ -27,30 +27,30 @@ const useSignUp = () => {
                     timer: 1000
                 });
                 login(response.data.token, response.data.user);
-                navigate('/sign-in-form')
-            } else if (response.status === 400) {
-                setError(response.data.message);
-            } else {
-                console.error('Registration failed');
+                navigate('/sign-in-form');
+            }
+        } catch (error) {
+            if (error.response && error.response.status === 400) {
+                setError(error.response.data.message);
                 Swal.fire({
                     position: "top-end",
                     icon: "error",
-                    title: `${response.data.message}`,
+                    title: `${error.response.data.message}`,
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            } else {
+                console.error('Registration failed', error.message);
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: `Registration failed: ${error.message}`,
                     showConfirmButton: false,
                     timer: 1000
                 });
             }
-        } catch (error) {
-            console.error('Registration failed', error.message);
-            Swal.fire({
-                position: "top-end",
-                icon: "error",
-                title: `${error.message}`,
-                showConfirmButton: false,
-                timer: 1000
-            });
         } finally {
-            setLoading(false); 
+            setLoading(false);
         }
     };
 

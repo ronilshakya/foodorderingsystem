@@ -60,7 +60,13 @@ const GetFoodItems = () => {
           placeholder="Set inventory"
           type="number"
           class="swal2-input"
-          id="swal2-input-inventory">`,
+          id="swal2-input-inventory">,
+        <input
+          placeholder="Set Description"
+          type="text"
+          class="swal2-input"
+          id="swal2-input-description">`,
+
       showCancelButton: true,
       confirmButtonText: 'Update',
       cancelButtonText: 'Cancel',
@@ -70,17 +76,19 @@ const GetFoodItems = () => {
         const inputPrice = Swal.getPopup().querySelector('#swal2-input-price').value;
         const inputCategory = Swal.getPopup().querySelector('#swal2-input-category').value;
         const inputInventory = Swal.getPopup().querySelector('#swal2-input-inventory').value;
-        return { inputName, inputPrice, inputCategory, inputInventory };
+        const inputDescription = Swal.getPopup().querySelector('#swal2-input-description').value;
+        return { inputName, inputPrice, inputCategory, inputInventory, inputDescription };
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        const { inputName, inputPrice, inputCategory, inputInventory } = result.value;
+        const { inputName, inputPrice, inputCategory, inputInventory, inputDescription } = result.value;
         const newFoodItem = {};
   
         if (inputName) newFoodItem.name = inputName;
         if (inputPrice) newFoodItem.price = parseFloat(inputPrice);
         if (inputCategory) newFoodItem.category = inputCategory;
         if (inputInventory) newFoodItem.inventory = parseInt(inputInventory, 10);
+        if (inputDescription) newFoodItem.description = inputDescription;
   
         updateFood(id, newFoodItem);
       }

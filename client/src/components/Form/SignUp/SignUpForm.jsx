@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import Input from '../../template/Input';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import useSignUp from '../../../hooks/useSignUp';
 import logo from '../../../assets/horizontallogo.png'
 
 const SignUpForm = () => {
-    const {loading,error,registerUser} = useSignUp();
+    const {registerUser} = useSignUp();
 
 
-    const navigate = useNavigate();
+    
 
     const [username, setUsername] = useState('');
     const [usernameError, setUsernameError] = useState('');

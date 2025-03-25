@@ -18,7 +18,6 @@ const useLogin = () => {
             const response = await axios.post('http://localhost:8000/api/auth/signin', values);
 
             if (response.status === 201) {
-                console.log(response.data.message);
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -29,29 +28,38 @@ const useLogin = () => {
 
                 login(response.data.token, response.data.user);
                 navigate('/');
-            }else {
-                console.log('Login failed');
+            }
+        } catch (error) {
+            if (error.response && error.response.status === 400) {
+                setError(error.response.data.message);
                 Swal.fire({
                     position: "top-end",
                     icon: "error",
-                    title: `Login failed`,
+                    title: `${error.response.data.message}`,
                     showConfirmButton: false,
                     timer: 1000
                 });
-                navigate('/sign-in-form');
+            }else if (error.response.status === 404) {
+                setError('User not found');
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: 'User not found',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            } else {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: `Login failed: ${error.message}`,
+                    showConfirmButton: false,
+                    timer: 1000
+                });
             }
-        } catch (error) {
-            console.error('Login failed', error);
             navigate('/sign-in-form');
-            Swal.fire({
-                position: "top-end",
-                icon: "error",
-                title: `Login failed`,
-                showConfirmButton: false,
-                timer: 1000
-            });
         } finally {
-            setLoading(false); 
+            setLoading(false);
         }
     };
 

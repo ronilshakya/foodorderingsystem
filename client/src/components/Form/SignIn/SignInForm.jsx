@@ -78,7 +78,7 @@ const SignInForm = () => {
                         <Input
                             label="Username"
                             type="text"
-                            placeholder="example@gmail.com"
+                            placeholder="User123"
                             id="username"
                             value={username}
                             onChange={handleUsernameChange}
